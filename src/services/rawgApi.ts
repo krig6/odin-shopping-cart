@@ -13,8 +13,27 @@ type ApiResponse = {
     results: ApiGame[]
 }
 
-export const fetchApiGames = async (): Promise<ApiResponse> => {
-    const response = await fetch(`${RAWG_API_URL}/games?key=${RAWG_API_KEY}`)
+type FetchGamesParams = {
+    ordering?: string
+    page_size?: number
+}
+
+export const fetchApiGames = async (
+    params?: FetchGamesParams
+): Promise<ApiResponse> => {
+    const url = new URL(`${RAWG_API_URL}/games`)
+
+    url.searchParams.set('key', RAWG_API_KEY)
+
+    if (params?.ordering) {
+        url.searchParams.set('ordering', params.ordering)
+    }
+
+    if (params?.page_size) {
+        url.searchParams.set('page_size', String(params.page_size))
+    }
+
+    const response = await fetch(url.toString())
 
     if (!response.ok) {
         throw new Error('Failed to fetch games.')
