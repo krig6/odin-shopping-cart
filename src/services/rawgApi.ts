@@ -13,7 +13,7 @@ type ApiResponse = {
     results: ApiGame[]
 }
 
-type FetchGamesParams = {
+export type FetchGamesParams = {
     dates?: string
     ordering?: string
     page_size?: number
