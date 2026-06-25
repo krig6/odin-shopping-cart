@@ -14,6 +14,7 @@ type ApiResponse = {
 }
 
 type FetchGamesParams = {
+    dates?: string
     ordering?: string
     page_size?: number
 }
@@ -31,6 +32,10 @@ export const fetchApiGames = async (
 
     if (params?.page_size) {
         url.searchParams.set('page_size', String(params.page_size))
+    }
+
+    if (params?.dates) {
+        url.searchParams.set('dates', params.dates)
     }
 
     const response = await fetch(url.toString())
