@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
 import { fetchGameCards } from '../../services/gameService'
+import { CarouselSlide } from './CarouselSlide'
 import type { GameCard } from '../../type/game'
+import useEmblaCarousel from 'embla-carousel-react'
 import './embla.css'
 
 export const EmblaCarousel = () => {
@@ -23,13 +24,7 @@ export const EmblaCarousel = () => {
             <div className="embla__viewport" ref={emblaRef}>
                 <div className="embla__container">
                     {games.map((game) => (
-                        <div key={game.id} className="embla__slide">
-                            <img src={game.background_image} alt={game.name} />
-                            <div>
-                                <h2>{game.name}</h2>
-                                <span>⭐ {game.rating}</span>
-                            </div>
-                        </div>
+                        <CarouselSlide key={game.id} game={game} />
                     ))}
                 </div>
             </div>
