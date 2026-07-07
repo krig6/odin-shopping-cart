@@ -16,11 +16,17 @@ export const PopularGames = () => {
         <section className="popular-games">
             <h2>Popular Games</h2>
             <div className="popular-games__grid">
-                <div className="game-card">Card 1</div>
-                <div className="game-card">Card 2</div>
-                <div className="game-card">Card 3</div>
-                <div className="game-card">Card 4</div>
-                <div className="game-card">Card 5</div>
+                {games.map((game) => (
+                    <div className="popular-games__card">
+                        <img src={game.background_image} alt={game.name} />
+                        <div className="popular-games__details">
+                            <h2>{game.name}</h2>
+                            <p>$49.99</p>
+                            <span>⭐ {game.rating}</span>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                ))}
             </div>
         </section>
     )
