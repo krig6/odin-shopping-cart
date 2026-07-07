@@ -48,6 +48,7 @@ export const fetchApiGames = async (
 }
 
 export type ApiGenre = {
+    id: number
     name: string
     background_image: string
 }
