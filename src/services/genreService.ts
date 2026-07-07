@@ -10,6 +10,6 @@ export const fetchGenreCards = async (
     return data.results.map((genre) => ({
         id: genre.id,
         name: genre.name,
-        background_image: genre.background_image,
+        background_image: genre.image_background,
     }))
 }
