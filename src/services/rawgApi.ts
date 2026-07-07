@@ -9,7 +9,7 @@ export type ApiGame = {
     released: string
 }
 
-type ApiResponse = {
+type GamesResponse = {
     results: ApiGame[]
 }
 
@@ -21,7 +21,7 @@ export type FetchGamesParams = {
 
 export const fetchApiGames = async (
     params?: FetchGamesParams
-): Promise<ApiResponse> => {
+): Promise<GamesResponse> => {
     const url = new URL(`${RAWG_API_URL}/games`)
 
     url.searchParams.set('key', RAWG_API_KEY)
@@ -42,6 +42,44 @@ export const fetchApiGames = async (
 
     if (!response.ok) {
         throw new Error('Failed to fetch games.')
+    }
+
+    return response.json()
+}
+
+export type ApiGenre = {
+    name: string
+    background_image: string
+}
+
+type GenresResponse = {
+    results: ApiGenre[]
+}
+
+export type FetchGenresParams = {
+    ordering?: string
+    page_size?: number
+}
+
+export const fetchApiGenres = async (
+    params?: FetchGenresParams
+): Promise<GenresResponse> => {
+    const url = new URL(`${RAWG_API_URL}/genres`)
+
+    url.searchParams.set('key', RAWG_API_KEY)
+
+    if (params?.ordering) {
+        url.searchParams.set('ordering', params.ordering)
+    }
+
+    if (params?.page_size) {
+        url.searchParams.set('page_size', String(params.page_size))
+    }
+
+    const response = await fetch(url.toString())
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch genres.')
     }
 
     return response.json()
