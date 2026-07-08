@@ -17,7 +17,7 @@ export const PopularGames = () => {
             <h2>Popular Games</h2>
             <div className="popular-games__grid">
                 {games.map((game) => (
-                    <div className="popular-games__card">
+                    <div className="popular-games__card" key={game.id}>
                         <img src={game.background_image} alt={game.name} />
                         <div className="popular-games__details">
                             <h2>{game.name}</h2>
