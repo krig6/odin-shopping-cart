@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { fetchGenreCards } from '../../services/genreService'
-import type { GenreCard } from '../../type/genre'
+import type { Genre } from '../../type/genre'
 
 export const BrowseByGenre = () => {
-    const [genres, setGenres] = useState<GenreCard[]>([])
+    const [genres, setGenres] = useState<Genre[]>([])
 
     useEffect(() => {
         fetchGenreCards({
