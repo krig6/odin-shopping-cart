@@ -5,11 +5,15 @@ type CarouselSlideProps = {
 }
 
 export const CarouselSlide = ({ game }: CarouselSlideProps) => (
-    <div className="embla__slide">
+    <article>
         <img src={game.background_image} alt={game.name} />
+
         <div>
-            <h2>{game.name}</h2>
-            <span>⭐ {game.rating}</span>
+            <h3>{game.name}</h3>
+
+            <span aria-label={`Rating: ${game.rating} out of 5`}>
+                ⭐ {game.rating}
+            </span>
         </div>
-    </div>
+    </article>
 )
