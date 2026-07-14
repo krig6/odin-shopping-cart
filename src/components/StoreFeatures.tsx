@@ -1,23 +1,29 @@
+const STORE_FEATURES = [
+    {
+        title: 'Instant Delivery',
+        description: 'Get your games instantly',
+    },
+    {
+        title: 'Secure Payment',
+        description: '100% secure checkout',
+    },
+    {
+        title: 'Great Prices',
+        description: 'Best deals always',
+    },
+    {
+        title: '24/7 Support',
+        description: "We're here to help",
+    },
+]
+
 export const StoreFeatures = () => (
     <section className="store-features">
-        <div className="store-feature">
-            <h4>Instant Delivery</h4>
-            <p>Get your games instantly</p>
-        </div>
-
-        <div className="store-feature">
-            <h4>Secure Payment</h4>
-            <p>100% secure checkout</p>
-        </div>
-
-        <div className="store-feature">
-            <h4>Great Prices</h4>
-            <p>Best deals always</p>
-        </div>
-
-        <div className="store-feature">
-            <h4>24/7 Support </h4>
-            <p>We're here to help</p>
-        </div>
+        {STORE_FEATURES.map((feature) => (
+            <article key={feature.title}>
+                <h4>{feature.title}</h4>
+                <p>{feature.description}</p>
+            </article>
+        ))}
     </section>
 )
