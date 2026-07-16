@@ -2,9 +2,8 @@ import { fetchApiGames } from './rawgApi'
 import type { GameCard } from '../type/game'
 import type { FetchGamesParams } from './rawgApi'
 
-export const fetchGameCards = async (
-    params: FetchGamesParams
-): Promise<GameCard[]> => {
+export const fetchGames = async (
+    params?: FetchGamesParams
     const data = await fetchApiGames(params)
 
     return data.results.map((game) => ({

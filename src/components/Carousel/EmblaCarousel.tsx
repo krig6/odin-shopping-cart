@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { fetchGameCards } from '../../services/gameService'
+import { fetchGames } from '../../services/gameService'
 import { CarouselSlide } from './CarouselSlide'
 import type { GameCard } from '../../type/game'
 import useEmblaCarousel from 'embla-carousel-react'
@@ -10,7 +10,7 @@ export const EmblaCarousel = () => {
     const [games, setGames] = useState<GameCard[]>([])
 
     useEffect(() => {
-        fetchGameCards({
+        fetchGames({
             dates: '2026-01-01,2026-12-31',
             page_size: 5,
         }).then(setGames)

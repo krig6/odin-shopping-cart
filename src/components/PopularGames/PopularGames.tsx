@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { fetchGameCards } from '../../services/gameService'
 import type { GameCard } from '../../type/game'
+import { fetchGames } from '../../services/gameService'
 import { PopularGameCard } from './PopularGameCard'
 
 export const PopularGames = () => {
     const [games, setGames] = useState<GameCard[]>([])
 
     useEffect(() => {
-        fetchGameCards({
+        fetchGames({
             dates: '2025-01-01,2025-12-31',
             page_size: 5,
         }).then(setGames)

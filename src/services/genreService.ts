@@ -2,7 +2,7 @@ import type { Genre } from '../type/genre'
 import { fetchApiGenres } from './rawgApi'
 import type { FetchGenresParams } from './rawgApi'
 
-export const fetchGenreCards = async (
+export const fetchGenres = async (
     params?: FetchGenresParams
 ): Promise<Genre[]> => {
     const data = await fetchApiGenres(params)

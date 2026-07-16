@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import type { Genre } from '../../type/genre'
-import { fetchGenreCards } from '../../services/genreService'
+import { fetchGenres } from '../../services/genreService'
 
 export const GenreFilter = () => {
     const [genres, setGenres] = useState<Genre[]>([])
 
     useEffect(() => {
-        fetchGenreCards().then(setGenres)
+        fetchGenres().then(setGenres)
     }, [])
 
     return (

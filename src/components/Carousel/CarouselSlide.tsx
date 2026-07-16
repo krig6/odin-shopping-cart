@@ -1,4 +1,4 @@
-import type { GameCard } from '../../type/game'
+import type { Game } from '../../type/game'
 
 type CarouselSlideProps = {
     game: GameCard

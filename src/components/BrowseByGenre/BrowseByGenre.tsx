@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { fetchGenreCards } from '../../services/genreService'
+import { fetchGenres } from '../../services/genreService'
 import type { Genre } from '../../type/genre'
 import { GenreCard } from './GenreCard'
 
@@ -7,7 +7,7 @@ export const BrowseByGenre = () => {
     const [genres, setGenres] = useState<Genre[]>([])
 
     useEffect(() => {
-        fetchGenreCards({
+        fetchGenres({
             page_size: 2,
         }).then(setGenres)
     }, [])
