@@ -1,8 +1,8 @@
 import { Cart } from '@boxicons/react'
-import type { GameCard } from '../../type/game'
+import type { Game } from '../../type/game'
 
 type PopularGameCardProps = {
-    game: GameCard
+    game: Game
 }
 
 export const PopularGameCard = ({ game }: PopularGameCardProps) => (

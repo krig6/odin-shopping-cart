@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import type { GameCard } from '../../type/game'
 import { fetchGames } from '../../services/gameService'
+import type { Game } from '../../type/game'
 import { PopularGameCard } from './PopularGameCard'
 
 export const PopularGames = () => {
-    const [games, setGames] = useState<GameCard[]>([])
+    const [games, setGames] = useState<Game[]>([])
 
     useEffect(() => {
         fetchGames({

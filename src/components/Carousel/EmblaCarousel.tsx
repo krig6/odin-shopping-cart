@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { fetchGames } from '../../services/gameService'
 import { CarouselSlide } from './CarouselSlide'
-import type { GameCard } from '../../type/game'
+import type { Game } from '../../type/game'
 import useEmblaCarousel from 'embla-carousel-react'
 import './embla.css'
 
 export const EmblaCarousel = () => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
-    const [games, setGames] = useState<GameCard[]>([])
+    const [games, setGames] = useState<Game[]>([])
 
     useEffect(() => {
         fetchGames({

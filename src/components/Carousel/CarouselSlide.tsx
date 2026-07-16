@@ -1,7 +1,7 @@
 import type { Game } from '../../type/game'
 
 type CarouselSlideProps = {
-    game: GameCard
+    game: Game
 }
 
 export const CarouselSlide = ({ game }: CarouselSlideProps) => (
