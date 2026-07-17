@@ -12,7 +12,14 @@ export const GenreFilter = () => {
     return (
         <div>
             {genres.map((genre) => (
-                <p key={genre.id}>{genre.name}</p>
+                <label key={genre.id} htmlFor={`genre-${genre.id}`}>
+                    <input
+                        id={`genre-${genre.id}`}
+                        type="checkbox"
+                        value={genre.id}
+                    />
+                    {genre.name}
+                </label>
             ))}
         </div>
     )
