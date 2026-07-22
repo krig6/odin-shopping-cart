@@ -3,7 +3,8 @@ import { Star } from '@boxicons/react'
 const RATINGS = [5, 4, 3, 2, 1]
 
 export const RatingFilter = () => (
-    <div>
+    <fieldset>
+        <legend>Rating</legend>
         {RATINGS.map((rating) => (
             <label key={rating} htmlFor={`rating-${rating}`}>
                 <input id={`rating-${rating}`} type="checkbox" value={rating} />
@@ -18,5 +19,5 @@ export const RatingFilter = () => (
                 <span>& Up</span>
             </label>
         ))}
-    </div>
+    </fieldset>
 )

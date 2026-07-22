@@ -10,7 +10,8 @@ export const GenreFilter = () => {
     }, [])
 
     return (
-        <div>
+        <fieldset>
+            <legend>Genre</legend>
             {genres.map((genre) => (
                 <label key={genre.id} htmlFor={`genre-${genre.id}`}>
                     <input
@@ -21,6 +22,6 @@ export const GenreFilter = () => {
                     {genre.name}
                 </label>
             ))}
-        </div>
+        </fieldset>
     )
 }
