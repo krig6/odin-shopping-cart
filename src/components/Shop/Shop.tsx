@@ -5,7 +5,7 @@ import { GameGrid } from './GameGrid'
 
 export const Shop = () => {
     const [selectedGenres, setSelectedGenres] = useState<number[]>([])
-    const [selectedRating, setSelectedRating] = useState<number>(5)
+    const [selectedRating, setSelectedRating] = useState<number | undefined>()
 
     const handleGenreChange = (genreId: number) => {
         setSelectedGenres((prev) =>

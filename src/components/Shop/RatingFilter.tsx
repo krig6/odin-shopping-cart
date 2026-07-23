@@ -3,7 +3,7 @@ import { Star } from '@boxicons/react'
 const RATINGS = [5, 4, 3, 2, 1]
 
 type RatingFilterProps = {
-    selectedRating: number
+    selectedRating: number | undefined
     onChange: (rating: number) => void
 }
 

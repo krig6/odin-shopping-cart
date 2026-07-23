@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 
 type GameGridProps = {
     selectedGenres: number[]
-    selectedRating: number
+    selectedRating: number | undefined
 }
 
 export const GameGrid = ({ selectedGenres, selectedRating }: GameGridProps) => {
@@ -16,7 +16,9 @@ export const GameGrid = ({ selectedGenres, selectedRating }: GameGridProps) => {
         }).then(setGames)
     }, [selectedGenres])
 
-    const filteredGames = games.filter((game) => game.rating >= selectedRating)
+    const filteredGames = games.filter(
+        (game) => selectedRating === undefined || game.rating >= selectedRating
+    )
 
     return (
         <div>
