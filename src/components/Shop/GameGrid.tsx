@@ -2,14 +2,18 @@ import { fetchGames } from '../../services/gameService'
 import type { Game } from '../../type/game'
 import { useState, useEffect } from 'react'
 
-export const GameGrid = () => {
+type GameGridProps = {
+    selectedGenres: number[]
+}
+
+export const GameGrid = ({ selectedGenres }: GameGridProps) => {
     const [games, setGames] = useState<Game[]>([])
 
     useEffect(() => {
         fetchGames({
-            genres: '',
+            genres: selectedGenres.join(','),
         }).then(setGames)
-    }, [])
+    }, [selectedGenres])
 
     return (
         <div>

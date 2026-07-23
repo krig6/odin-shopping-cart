@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react'
 import type { Genre } from '../../type/genre'
 import { fetchGenres } from '../../services/genreService'
 
-export const GenreFilter = () => {
+type GenreFilterProps = {
+    selectedGenres: number[]
+    onChange: (genreId: number) => void
+}
+export const GenreFilter = ({ selectedGenres, onChange }: GenreFilterProps) => {
     const [genres, setGenres] = useState<Genre[]>([])
 
     useEffect(() => {
@@ -18,6 +22,8 @@ export const GenreFilter = () => {
                         id={`genre-${genre.id}`}
                         type="checkbox"
                         value={genre.id}
+                        checked={selectedGenres.includes(genre.id)}
+                        onChange={() => onChange(genre.id)}
                     />
                     {genre.name}
                 </label>
