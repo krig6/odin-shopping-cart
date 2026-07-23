@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react'
 
 type GameGridProps = {
     selectedGenres: number[]
+    selectedRating: number
 }
 
-export const GameGrid = ({ selectedGenres }: GameGridProps) => {
+export const GameGrid = ({ selectedGenres, selectedRating }: GameGridProps) => {
     const [games, setGames] = useState<Game[]>([])
 
     useEffect(() => {
@@ -15,9 +16,11 @@ export const GameGrid = ({ selectedGenres }: GameGridProps) => {
         }).then(setGames)
     }, [selectedGenres])
 
+    const filteredGames = games.filter((game) => game.rating >= selectedRating)
+
     return (
         <div>
-            {games.map((game) => (
+            {filteredGames.map((game) => (
                 <div key={game.id}>
                     <p>{game.name}</p>
                 </div>

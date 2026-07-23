@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { GenreFilter } from './GenreFilter'
+import { RatingFilter } from './RatingFilter'
 import { GameGrid } from './GameGrid'
 
 export const Shop = () => {
     const [selectedGenres, setSelectedGenres] = useState<number[]>([])
+    const [selectedRating, setSelectedRating] = useState<number>(5)
 
     const handleGenreChange = (genreId: number) => {
         setSelectedGenres((prev) =>
@@ -13,6 +15,10 @@ export const Shop = () => {
         )
     }
 
+    const handleRatingChange = (rating: number) => {
+        setSelectedRating(rating)
+    }
+
     return (
         <>
             <GenreFilter
@@ -20,7 +26,15 @@ export const Shop = () => {
                 onChange={handleGenreChange}
             />
 
-            <GameGrid selectedGenres={selectedGenres} />
+            <RatingFilter
+                selectedRating={selectedRating}
+                onChange={handleRatingChange}
+            />
+
+            <GameGrid
+                selectedGenres={selectedGenres}
+                selectedRating={selectedRating}
+            />
         </>
     )
 }
