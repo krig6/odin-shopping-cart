@@ -1,6 +1,6 @@
 export const Navbar = () => (
-    <nav>
-        <ul>
+    <nav className="flex-1">
+        <ul className="flex justify-center gap-10">
             <li>
                 <a href="home">Home</a>
             </li>
