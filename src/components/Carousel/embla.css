@@ -1,3 +1,7 @@
+.embla {
+    padding-inline: 20px;
+}
+
 .embla__viewport {
     overflow: hidden;
 }

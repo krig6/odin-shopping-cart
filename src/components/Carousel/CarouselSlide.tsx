@@ -5,7 +5,7 @@ type CarouselSlideProps = {
 }
 
 export const CarouselSlide = ({ game }: CarouselSlideProps) => (
-    <article>
+    <article className="embla__slide">
         <img src={game.background_image} alt={game.name} />
 
         <div>
