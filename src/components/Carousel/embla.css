@@ -14,6 +14,13 @@
 .embla__slide {
     flex: 0 0 100%;
     min-width: 0;
-    background-color: black;
-    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.embla__slide img {
+    border-radius: 12px;
+    height: 80vh;
+    object-fit: cover;
+    width: 80%;
 }
