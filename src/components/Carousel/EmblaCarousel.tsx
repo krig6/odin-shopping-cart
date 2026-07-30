@@ -3,11 +3,21 @@ import { fetchGames } from '../../services/gameService'
 import { CarouselSlide } from './CarouselSlide'
 import type { Game } from '../../type/game'
 import useEmblaCarousel from 'embla-carousel-react'
+import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 import './embla.css'
+import type { EmblaOptionsType } from 'embla-carousel'
 
-export const EmblaCarousel = () => {
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
+type PropType = {
+    options?: EmblaOptionsType
+}
+
+export const EmblaCarousel = (props: PropType) => {
+    const { options } = props
+    const [emblaRef, emblaApi] = useEmblaCarousel(options)
     const [games, setGames] = useState<Game[]>([])
+
+    const { selectedIndex, scrollSnaps, onDotButtonClick } =
+        useDotButton(emblaApi)
 
     useEffect(() => {
         fetchGames({
@@ -15,9 +25,6 @@ export const EmblaCarousel = () => {
             page_size: 5,
         }).then(setGames)
     }, [])
-
-    const scrollPrev = () => emblaApi?.scrollPrev()
-    const scrollNext = () => emblaApi?.scrollNext()
 
     return (
         <div className="embla">
@@ -29,13 +36,21 @@ export const EmblaCarousel = () => {
                 </div>
             </div>
 
-            <button className="embla__prev" onClick={scrollPrev}>
-                Previous
-            </button>
-
-            <button className="embla__next" onClick={scrollNext}>
-                Next
-            </button>
+            <div className="embla__controls">
+                <div className="embla__dots">
+                    {scrollSnaps.map((_, index) => (
+                        <DotButton
+                            key={index}
+                            onClick={() => onDotButtonClick(index)}
+                            className={`embla__dot ${
+                                index === selectedIndex
+                                    ? 'embla__dot--selected'
+                                    : ''
+                            }`}
+                        />
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }

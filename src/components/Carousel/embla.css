@@ -1,5 +1,10 @@
 .embla {
-    padding-inline: 20px;
+    max-width: 48rem;
+    margin: auto;
+
+    --slide-height: 19rem;
+    --slide-spacing: 1rem;
+    --slide-size: 100%;
 }
 
 .embla__viewport {
@@ -8,12 +13,19 @@
 
 .embla__container {
     display: flex;
-    touch-action: pan-y pinch-zoom;
+    touch-action: pan-x pinch-zoom;
+    margin-top: calc(var(--slide-spacing) * -1);
+    height: calc(var(--slide-spacing) + var(--slide-height));
+    flex-direction: column;
 }
 
 .embla__slide {
-    flex: 0 0 100%;
-    min-width: 0;
+    transform: translate3d(0, 0, 0);
+    flex: 0 0 var(--slide-size);
+    min-height: 0;
+    padding-top: var(--slide-spacing);
+}
+
 .embla__dots {
     display: flex;
     flex-wrap: wrap;
@@ -44,22 +56,13 @@
     position: relative;
 }
 
-.embla__slide img {
-    border-radius: 12px;
-    height: 80vh;
-    object-fit: cover;
-    width: 80%;
-}
 .embla__dot:before,
 .embla__dot:after {
     width: 1.4rem;
     height: 1.4rem;
 
-.embla__slide-content {
     border-radius: 50%;
     position: absolute;
-    bottom: 2rem;
-    color: white;
     display: flex;
     align-items: center;
     content: '';
