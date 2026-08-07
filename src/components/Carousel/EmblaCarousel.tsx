@@ -6,6 +6,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 import './embla.css'
 import type { EmblaOptionsType } from 'embla-carousel'
+import { RadioCircle, Circle } from '@boxicons/react'
 
 type PropType = {
     options?: EmblaOptionsType
@@ -42,12 +43,13 @@ export const EmblaCarousel = (props: PropType) => {
                         <DotButton
                             key={index}
                             onClick={() => onDotButtonClick(index)}
-                            className={`embla__dot ${
-                                index === selectedIndex
-                                    ? 'embla__dot--selected'
-                                    : ''
-                            }`}
-                        />
+                        >
+                            {index === selectedIndex ? (
+                                <Circle fill="#ff0000" />
+                            ) : (
+                                <RadioCircle fill="#808080" />
+                            )}
+                        </DotButton>
                     ))}
                 </div>
             </div>
