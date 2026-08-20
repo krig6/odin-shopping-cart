@@ -1,9 +1,8 @@
 .embla {
-    max-width: 48rem;
-    margin: auto;
+    width: 100%;
 
-    --slide-height: 19rem;
-    --slide-spacing: 1rem;
+    --slide-height: 50rem;
+    --slide-spacing: 2rem;
     --slide-size: 100%;
 
     --detail-medium-contrast: rgb(234, 234, 234);
@@ -12,6 +11,8 @@
 
 .embla__viewport {
     overflow: hidden;
+    display: flex;
+    justify-content: center;
 }
 
 .embla__container {
@@ -20,13 +21,16 @@
     margin-top: calc(var(--slide-spacing) * -1);
     height: calc(var(--slide-spacing) + var(--slide-height));
     flex-direction: column;
+    align-items: center;
+    position: relative;
 }
 
 .embla__slide {
     transform: translate3d(0, 0, 0);
     flex: 0 0 var(--slide-size);
-    min-height: 0;
     padding-top: var(--slide-spacing);
+    width: 95%;
+    aspect-ratio: 16/7;
 }
 
 .embla__dots {
@@ -35,4 +39,9 @@
     justify-content: flex-end;
     align-items: center;
     margin-right: calc((2.6rem - 1.4rem) / 2 * -1);
+}
+
+.embla__slide img {
+    display: block;
+    width: 100%;
 }
