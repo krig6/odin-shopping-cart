@@ -38,7 +38,12 @@
     flex-wrap: wrap;
     justify-content: flex-end;
     align-items: center;
-    margin-right: calc((2.6rem - 1.4rem) / 2 * -1);
+    gap: 1rem;
+}
+
+.embla__dot-icon {
+    height: 12px;
+    width: 12px;
 }
 
 .embla__slide img {
