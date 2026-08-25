@@ -45,3 +45,10 @@
     display: block;
     width: 100%;
 }
+
+.embla__controls {
+    position: absolute;
+    left: 50%;
+    bottom: 2%;
+    transform: translateX(-50%);
+}
