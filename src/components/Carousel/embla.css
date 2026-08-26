@@ -1,44 +1,41 @@
 .embla {
     width: 100%;
-
-    --slide-height: 50rem;
-    --slide-spacing: 2rem;
-    --slide-size: 100%;
-
-    --detail-medium-contrast: rgb(234, 234, 234);
-    --text-body: blue;
+    position: relative;
+    aspect-ratio: 16 / 7;
 }
 
 .embla__viewport {
     overflow: hidden;
-    display: flex;
-    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 .embla__container {
     display: flex;
-    touch-action: pan-x pinch-zoom;
-    margin-top: calc(var(--slide-spacing) * -1);
-    height: calc(var(--slide-spacing) + var(--slide-height));
     flex-direction: column;
-    align-items: center;
-    position: relative;
+    height: 100%;
+    touch-action: pan-y pinch-zoom;
 }
 
 .embla__slide {
-    transform: translate3d(0, 0, 0);
-    flex: 0 0 var(--slide-size);
-    padding-top: var(--slide-spacing);
-    width: 95%;
-    aspect-ratio: 16/7;
+    flex: 0 0 100%;
+    min-height: 0;
+    display: flex;
+    justify-content: center;
 }
 
-.embla__dots {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 1rem;
+.embla__slide img {
+    display: block;
+    width: 95%;
+    height: 100%;
+    object-fit: cover;
+}
+.embla__controls {
+    position: absolute;
+    left: 50%;
+    bottom: 1.5rem;
+    transform: translateX(-50%);
+    z-index: 10;
 }
 
 .embla__dot-icon {
@@ -46,14 +43,7 @@
     width: 12px;
 }
 
-.embla__slide img {
-    display: block;
-    width: 100%;
-}
-
-.embla__controls {
-    position: absolute;
-    left: 50%;
-    bottom: 2%;
-    transform: translateX(-50%);
+.embla__dots {
+    display: flex;
+    gap: 0.5rem;
 }
