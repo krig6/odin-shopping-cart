@@ -1,27 +1,39 @@
 import { Cart } from '@boxicons/react'
 import type { Game } from '../../type/game'
+import placeholder from '../../assets/images/placeholder.png'
 
 type PopularGameCardProps = {
     game: Game
 }
 
 export const PopularGameCard = ({ game }: PopularGameCardProps) => (
-    <article>
-        <img src={game.background_image} alt={game.name} />
+    <article className="">
+        <img
+            className="aspect-2/3 w-full object-cover"
+            src={placeholder}
+            alt={game.name}
+        />
 
-        <div>
-            <h3>{game.name}</h3>
+        <div className="p-2.5">
+            <h3 className="truncate text-sm font-semibold text-white">
+                {game.name}
+            </h3>
 
-            <p>$49.99</p>
+            <div className="mt-1.5 flex items-center justify-between">
+                <div>
+                    <p className="text-sm font-semibold text-white">$49.99</p>
 
-            <p>
-                <span aria-label={`Rating: ${game.rating} out of 5`}>
-                    ⭐ {game.rating}
-                </span>
-            </p>
-            <button type="button" aria-label="Add to cart">
-                <Cart />
-            </button>
+                    <p className="text-xs text-slate-400">⭐ {game.rating}</p>
+                </div>
+
+                <button
+                    type="button"
+                    className="rounded-md bg-blue-600 p-1.5 text-white"
+                    aria-label={`Add ${game.name} to cart`}
+                >
+                    <Cart size="xs" />
+                </button>
+            </div>
         </div>
     </article>
 )
