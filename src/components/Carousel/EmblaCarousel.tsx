@@ -10,10 +10,11 @@ import { Circle } from '@boxicons/react'
 
 type PropType = {
     options?: EmblaOptionsType
+    startIndex?: number
 }
 
 export const EmblaCarousel = (props: PropType) => {
-    const { options } = props
+    const { options, startIndex } = props
     const [emblaRef, emblaApi] = useEmblaCarousel(options)
     const [games, setGames] = useState<Game[]>([])
 
@@ -26,6 +27,12 @@ export const EmblaCarousel = (props: PropType) => {
             page_size: 5,
         }).then(setGames)
     }, [])
+
+    useEffect(() => {
+        if (emblaApi && games.length > 0 && startIndex !== undefined) {
+            emblaApi.scrollTo(startIndex, true)
+        }
+    }, [emblaApi, games, startIndex])
 
     return (
         <div className="embla">
