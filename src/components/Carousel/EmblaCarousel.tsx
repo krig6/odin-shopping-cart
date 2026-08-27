@@ -54,10 +54,7 @@ export const EmblaCarousel = (props: PropType) => {
                             {index === selectedIndex ? (
                                 <Circle pack="filled" fill="#FFFFFF" />
                             ) : (
-                                <Circle
-                                    fill="#64768b"
-                                    className="embla__dot-icon"
-                                />
+                                <Circle fill="#64768b" height={12} width={12} />
                             )}
                         </DotButton>
                     ))}

@@ -38,11 +38,6 @@
     z-index: 10;
 }
 
-.embla__dot-icon {
-    height: 12px;
-    width: 12px;
-}
-
 .embla__dots {
     display: flex;
     gap: 0.5rem;
