@@ -8,14 +8,16 @@ export const BrowseByGenre = () => {
 
     useEffect(() => {
         fetchGenres({
-            page_size: 2,
+            page_size: 6,
         }).then(setGenres)
     }, [])
 
     return (
-        <section className="browse-by-genre">
-            <h2>Browse by Genre</h2>
-            <div>
+        <section>
+            <h2 className="py-5 text-xl font-bold text-white">
+                Browse by Gennre
+            </h2>
+            <div className="grid w-full grid-cols-6 gap-8">
                 {genres.map((genre) => (
                     <GenreCard genre={genre} key={genre.id} />
                 ))}
