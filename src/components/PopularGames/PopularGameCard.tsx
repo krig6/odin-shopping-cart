@@ -7,9 +7,9 @@ type PopularGameCardProps = {
 }
 
 export const PopularGameCard = ({ game }: PopularGameCardProps) => (
-    <article className="">
+    <article className="rounded-lg border border-gray-700">
         <img
-            className="aspect-2/3 w-full object-cover"
+            className="aspect-2/3 w-full rounded-t-lg object-cover"
             src={placeholder}
             alt={game.name}
         />

@@ -14,8 +14,8 @@ export const PopularGames = () => {
     }, [])
 
     return (
-        <section className="popular-games">
-            <h2>Popular Games</h2>
+        <section>
+            <h2 className="py-5 text-xl font-bold text-white">Popular Games</h2>
             <div className="grid w-full grid-cols-5 gap-8">
                 {games.map((game) => (
                     <PopularGameCard game={game} key={game.id} />
