@@ -1,33 +1,44 @@
-import { useEffect, useState } from 'react'
-import type { Genre } from '../../type/genre'
-import { fetchGenres } from '../../services/genreService'
+const GAME_GENRES = [
+    'Action',
+    'Adventure',
+    'Arcade',
+    'Board Games',
+    'Card',
+    'Casual',
+    'Educational',
+    'Family',
+    'Fighting',
+    'Indie',
+    'Massively Multiplayer',
+    'Platformer',
+    'Puzzle',
+    'Racing',
+    'RPG',
+    'Shooter',
+    'Simulation',
+    'Sports',
+    'Strategy',
+]
 
 type GenreFilterProps = {
-    selectedGenres: number[]
-    onChange: (genreId: number) => void
+    selectedGenres: string[]
+    onChange: (genre: string) => void
 }
-export const GenreFilter = ({ selectedGenres, onChange }: GenreFilterProps) => {
-    const [genres, setGenres] = useState<Genre[]>([])
 
-    useEffect(() => {
-        fetchGenres().then(setGenres)
-    }, [])
-
-    return (
-        <fieldset>
-            <legend>Genre</legend>
-            {genres.map((genre) => (
-                <label key={genre.id} htmlFor={`genre-${genre.id}`}>
-                    <input
-                        id={`genre-${genre.id}`}
-                        type="checkbox"
-                        value={genre.id}
-                        checked={selectedGenres.includes(genre.id)}
-                        onChange={() => onChange(genre.id)}
-                    />
-                    {genre.name}
-                </label>
-            ))}
-        </fieldset>
-    )
-}
+export const GenreFilter = ({ selectedGenres, onChange }: GenreFilterProps) => (
+    <fieldset>
+        <legend>Genre</legend>
+        {GAME_GENRES.map((genre) => (
+            <label key={genre} htmlFor={`genre-${genre.toLowerCase}`}>
+                <input
+                    id={`genre-${genre.toLowerCase}`}
+                    type="checkbox"
+                    value={genre}
+                    checked={selectedGenres.includes(genre)}
+                    onChange={() => onChange(genre)}
+                />
+                {genre}
+            </label>
+        ))}
+    </fieldset>
+)
