@@ -15,7 +15,7 @@ export const Filters = ({
     onRatingChange,
 }: FilterProps) => {
     return (
-        <aside>
+        <>
             <header>
                 <h3>Filters</h3>
                 <button type="button">Clear All</button>
@@ -30,6 +30,6 @@ export const Filters = ({
                 selectedRating={selectedRating}
                 onChange={onRatingChange}
             />
-        </aside>
+        </>
     )
 }

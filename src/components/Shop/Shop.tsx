@@ -19,18 +19,20 @@ export const Shop = () => {
     }
 
     return (
-        <>
-            <Filters
-                selectedGenres={selectedGenres}
-                selectedRating={selectedRating}
-                onGenreChange={handleGenreChange}
-                onRatingChange={handleRatingChange}
-            />
+        <div className="text-white">
+            <aside>
+                <Filters
+                    selectedGenres={selectedGenres}
+                    selectedRating={selectedRating}
+                    onGenreChange={handleGenreChange}
+                    onRatingChange={handleRatingChange}
+                />
+            </aside>
 
             <GameGrid
                 selectedGenres={selectedGenres}
                 selectedRating={selectedRating}
             />
-        </>
+        </div>
     )
 }
