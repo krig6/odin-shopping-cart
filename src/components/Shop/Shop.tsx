@@ -19,20 +19,24 @@ export const Shop = () => {
     }
 
     return (
-        <div className="text-white">
-            <aside>
-                <Filters
-                    selectedGenres={selectedGenres}
-                    selectedRating={selectedRating}
-                    onGenreChange={handleGenreChange}
-                    onRatingChange={handleRatingChange}
-                />
-            </aside>
+        <div className="px-8 py-10 text-white">
+            <div className="mx-auto flex max-w-7xl gap-8">
+                <aside className="w-56 shrink-0">
+                    <Filters
+                        selectedGenres={selectedGenres}
+                        selectedRating={selectedRating}
+                        onGenreChange={handleGenreChange}
+                        onRatingChange={handleRatingChange}
+                    />
+                </aside>
 
-            <GameGrid
-                selectedGenres={selectedGenres}
-                selectedRating={selectedRating}
-            />
+                <main className="min-w-0 flex-1">
+                    <GameGrid
+                        selectedGenres={selectedGenres}
+                        selectedRating={selectedRating}
+                    />
+                </main>
+            </div>
         </div>
     )
 }

@@ -26,16 +26,24 @@ type GenreFilterProps = {
 }
 
 export const GenreFilter = ({ selectedGenres, onChange }: GenreFilterProps) => (
-    <fieldset>
-        <legend>Genre</legend>
+    <fieldset className="flex flex-col gap-3">
+        <legend className="mb-3 text-sm font-semibold tracking-wide text-slate-400 uppercase">
+            Genre
+        </legend>
+
         {GAME_GENRES.map((genre) => (
-            <label key={genre.slug} htmlFor={`genre-${genre.slug}`}>
+            <label
+                key={genre.slug}
+                htmlFor={`genre-${genre.slug}`}
+                className="flex cursor-pointer items-center gap-3 text-sm text-slate-300"
+            >
                 <input
                     id={`genre-${genre.slug}`}
                     type="checkbox"
-                    value={genre.name}
+                    value={genre.slug}
                     checked={selectedGenres.includes(genre.slug)}
                     onChange={() => onChange(genre.slug)}
+                    className="size-4 accent-blue-500"
                 />
                 {genre.name}
             </label>
