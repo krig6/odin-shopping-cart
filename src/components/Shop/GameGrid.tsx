@@ -3,7 +3,7 @@ import type { Game } from '../../type/game'
 import { useState, useEffect } from 'react'
 
 type GameGridProps = {
-    selectedGenres: number[]
+    selectedGenres: string[]
     selectedRating: number | undefined
 }
 
