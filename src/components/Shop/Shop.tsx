@@ -1,10 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import type { Game } from '../../type/game'
 import { GameGrid } from './GameGrid'
 import { Filters } from './Filters'
+import { fetchGames } from '../../services/gameService'
 
 export const Shop = () => {
     const [selectedGenres, setSelectedGenres] = useState<string[]>([])
     const [selectedRating, setSelectedRating] = useState<number | undefined>()
+    const [games, setGames] = useState<Game[]>([])
+
+    useEffect(() => {
+        fetchGames({
+            genres: selectedGenres.join(','),
+            page: 1,
+            page_size: 15,
+        }).then(setGames)
+    }, [selectedGenres])
 
     const handleGenreChange = (slug: string) => {
         setSelectedGenres((prev) =>
@@ -17,6 +28,10 @@ export const Shop = () => {
     const handleRatingChange = (rating: number) => {
         setSelectedRating(rating)
     }
+
+    const filteredGames = games.filter(
+        (game) => selectedRating === undefined || game.rating >= selectedRating
+    )
 
     return (
         <div className="px-8 py-10 text-white">
@@ -31,10 +46,7 @@ export const Shop = () => {
                 </aside>
 
                 <main className="min-w-0 flex-1">
-                    <GameGrid
-                        selectedGenres={selectedGenres}
-                        selectedRating={selectedRating}
-                    />
+                    <GameGrid games={filteredGames} />
                 </main>
             </div>
         </div>
