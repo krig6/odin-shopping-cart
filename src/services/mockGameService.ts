@@ -1,6 +1,6 @@
 import { mockGames } from '../data/mockGames.ts'
-import type { Game } from '../type/game'
+import type { GamesResult } from './gameService.ts'
 
-export const fetchMockGames = async (): Promise<Game[]> => {
-    return mockGames
+export const fetchMockGames = async (): Promise<GamesResult> => {
+    return { games: mockGames, count: mockGames.length }
 }

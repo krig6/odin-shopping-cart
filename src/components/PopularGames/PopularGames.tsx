@@ -10,7 +10,9 @@ export const PopularGames = () => {
         fetchGames({
             dates: '2025-01-01,2025-12-31',
             page_size: 5,
-        }).then(setGames)
+        }).then(({ games }) => {
+            setGames(games)
+        })
     }, [])
 
     return (

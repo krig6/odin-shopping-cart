@@ -11,6 +11,7 @@ export type ApiGame = {
 
 type GamesResponse = {
     results: ApiGame[]
+    count: number
 }
 
 export type FetchGamesParams = {
@@ -18,6 +19,7 @@ export type FetchGamesParams = {
     ordering?: string
     page_size?: number
     genres?: string
+    page?: number
 }
 
 export const fetchApiGames = async (
@@ -41,6 +43,10 @@ export const fetchApiGames = async (
 
     if (params?.genres) {
         url.searchParams.set('genres', String(params.genres))
+    }
+
+    if (params?.page) {
+        url.searchParams.set('page', String(params.page))
     }
 
     const response = await fetch(url.toString())

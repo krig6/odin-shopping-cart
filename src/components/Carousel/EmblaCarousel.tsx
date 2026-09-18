@@ -25,7 +25,9 @@ export const EmblaCarousel = (props: PropType) => {
         fetchGames({
             dates: '2026-01-01,2026-12-31',
             page_size: 5,
-        }).then(setGames)
+        }).then(({ games }) => {
+            setGames(games)
+        })
     }, [])
 
     useEffect(() => {

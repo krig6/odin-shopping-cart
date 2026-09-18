@@ -7,14 +7,19 @@ import { fetchGames } from '../../services/gameService'
 export const Shop = () => {
     const [selectedGenres, setSelectedGenres] = useState<string[]>([])
     const [selectedRating, setSelectedRating] = useState<number | undefined>()
+    const [page, setPage] = useState<number>(1)
     const [games, setGames] = useState<Game[]>([])
+    const [count, setCount] = useState<number>(0)
 
     useEffect(() => {
         fetchGames({
             genres: selectedGenres.join(','),
             page: 1,
             page_size: 15,
-        }).then(setGames)
+        }).then(({ games, count }) => {
+            setGames(games)
+            setCount(count)
+        })
     }, [selectedGenres])
 
     const handleGenreChange = (slug: string) => {
@@ -23,10 +28,23 @@ export const Shop = () => {
                 ? prev.filter((selectedSlug) => selectedSlug !== slug)
                 : [...prev, slug]
         )
+        setPage(1)
     }
 
     const handleRatingChange = (rating: number) => {
         setSelectedRating(rating)
+    }
+
+    const handleLoadMore = async () => {
+        const nextPage = page + 1
+        const { games: nextGames } = await fetchGames({
+            genres: selectedGenres.join(','),
+            page: nextPage,
+            page_size: 15,
+        })
+
+        setGames((prev) => [...prev, ...nextGames])
+        setPage(nextPage)
     }
 
     const filteredGames = games.filter(
@@ -49,6 +67,10 @@ export const Shop = () => {
                     <GameGrid games={filteredGames} />
                 </main>
             </div>
+
+            <button type="button" onClick={handleLoadMore}>
+                Load More
+            </button>
         </div>
     )
 }
