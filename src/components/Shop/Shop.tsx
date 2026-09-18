@@ -10,6 +10,7 @@ export const Shop = () => {
     const [page, setPage] = useState<number>(1)
     const [games, setGames] = useState<Game[]>([])
     const [count, setCount] = useState<number>(0)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     useEffect(() => {
         fetchGames({
@@ -19,10 +20,12 @@ export const Shop = () => {
         }).then(({ games, count }) => {
             setGames(games)
             setCount(count)
+            setIsLoading(false)
         })
     }, [selectedGenres])
 
     const handleGenreChange = (slug: string) => {
+        setIsLoading(true)
         setSelectedGenres((prev) =>
             prev.includes(slug)
                 ? prev.filter((selectedSlug) => selectedSlug !== slug)
@@ -36,6 +39,7 @@ export const Shop = () => {
     }
 
     const handleLoadMore = async () => {
+        setIsLoading(true)
         const nextPage = page + 1
         const { games: nextGames } = await fetchGames({
             genres: selectedGenres.join(','),
@@ -45,11 +49,14 @@ export const Shop = () => {
 
         setGames((prev) => [...prev, ...nextGames])
         setPage(nextPage)
+        setIsLoading(false)
     }
 
     const filteredGames = games.filter(
         (game) => selectedRating === undefined || game.rating >= selectedRating
     )
+
+    const hasMore = games.length < count && isLoading !== true
 
     return (
         <div className="px-8 py-10 text-white">
@@ -67,10 +74,11 @@ export const Shop = () => {
                     <GameGrid games={filteredGames} />
                 </main>
             </div>
-
-            <button type="button" onClick={handleLoadMore}>
-                Load More
-            </button>
+            {hasMore && (
+                <button type="button" onClick={handleLoadMore}>
+                    Load More
+                </button>
+            )}
         </div>
     )
 }
