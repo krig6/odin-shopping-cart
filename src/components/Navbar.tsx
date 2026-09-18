@@ -1,14 +1,16 @@
+import { Link } from 'react-router'
+
 export const Navbar = () => (
     <nav className="flex-1">
         <ul className="flex justify-center gap-10">
             <li>
-                <a href="home">Home</a>
+                <Link to="/">Home</Link>
             </li>
             <li>
-                <a href="shop">Shop</a>
+                <Link to="/shop">Shop</Link>
             </li>
             <li>
-                <a href="cart">Cart</a>
+                <Link to="/cart">Cart</Link>
             </li>
         </ul>
     </nav>
