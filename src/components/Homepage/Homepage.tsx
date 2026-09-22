@@ -9,12 +9,12 @@ const OPTIONS: EmblaOptionsType = { axis: 'y' }
 
 export const Homepage = () => {
     return (
-        <main>
+        <main className="mx-50">
+            <EmblaCarousel options={OPTIONS} startIndex={2} />
             <PopularGames />
             <BrowseByGenre />
             <CallToAction />
             <StoreFeatures />
-            <EmblaCarousel options={OPTIONS} startIndex={2} />
         </main>
     )
 }
