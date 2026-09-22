@@ -1,6 +1,5 @@
 import { Cart } from '@boxicons/react'
 import type { Game } from '../../type/game'
-import placeholder from '../../assets/images/placeholder.png'
 
 type PopularGameCardProps = {
     game: Game
@@ -10,7 +9,7 @@ export const PopularGameCard = ({ game }: PopularGameCardProps) => (
     <article className="rounded-lg border border-gray-700">
         <img
             className="aspect-2/3 w-full rounded-t-lg object-cover"
-            src={placeholder}
+            src={game.background_image}
             alt={game.name}
         />
 
