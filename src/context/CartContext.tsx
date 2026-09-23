@@ -6,6 +6,7 @@ export type CartContextValue = {
     items: CartItem[]
     totalItems: number
     totalPrice: number
+    estimatedTax: number
     addItem: (game: Game) => void
     removeItem: (gameId: number) => void
     updateQuantity: (gameId: number, quantity: number) => void

@@ -10,12 +10,17 @@ type CartProviderProps = {
 export const CartProvider = ({ children }: CartProviderProps) => {
     const [items, setItems] = useState<CartItem[]>([])
 
-    const totalItems = items.reduce((sum, item) => sum + item.quantity, 0)
-
-    const totalPrice = items.reduce(
-        (sum, item) => sum + item.price * item.quantity,
-        0
+    const totalItems = Number(
+        items.reduce((sum, item) => sum + item.quantity, 0).toFixed(2)
     )
+
+    const totalPrice = Number(
+        items
+            .reduce((sum, item) => sum + item.price * item.quantity, 0)
+            .toFixed(2)
+    )
+
+    const estimatedTax = Number((totalPrice * 0.12).toFixed(2))
 
     const addItem = (game: Game) => {
         setItems((prevItems) => {
@@ -59,6 +64,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
                 items,
                 totalItems,
                 totalPrice,
+                estimatedTax,
                 addItem,
                 removeItem,
                 updateQuantity,
