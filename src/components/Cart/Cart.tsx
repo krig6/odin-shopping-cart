@@ -2,6 +2,7 @@ import { Link } from 'react-router'
 import { ChevronLeft } from '@boxicons/react'
 import { mockGames } from '../../data/mockGames'
 import { CartProduct } from './CartProduct'
+import { OrderSummary } from './OrderSummary'
 
 const MOCK_CART_ITEMS = [
     {
@@ -51,7 +52,7 @@ export const Cart = () => {
                         <CartProduct item={item} />
                     ))}
                 </section>
-                <div className="order-summary"></div>
+                <OrderSummary items={MOCK_CART_ITEMS} />
             </div>
         </div>
     )
