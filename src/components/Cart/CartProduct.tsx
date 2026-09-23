@@ -1,3 +1,4 @@
+import { useCart } from '../../context/useCart'
 import type { CartItem } from '../../type/cart'
 import { Plus, Minus, TrashAlt } from '@boxicons/react'
 
@@ -6,6 +7,7 @@ type CartProductProps = {
 }
 
 export const CartProduct = ({ item }: CartProductProps) => {
+    const { updateQuantity, removeItem } = useCart()
     return (
         <section>
             <div>
@@ -17,14 +19,35 @@ export const CartProduct = ({ item }: CartProductProps) => {
 
             <div>
                 <div>
-                    <Plus />
+                    <button
+                        type="button"
+                        onClick={() =>
+                            updateQuantity(item.game.id, item.quantity - 1)
+                        }
+                    >
+                        <Minus />
+                    </button>
+
                     {item.quantity}
-                    <Minus />
+
+                    <button
+                        type="button"
+                        onClick={() => {
+                            updateQuantity(item.game.id, item.quantity + 1)
+                        }}
+                    >
+                        <Plus />
+                    </button>
                 </div>
 
                 <div>
                     ${(item.price * item.quantity).toFixed(2)}
-                    <TrashAlt />
+                    <button
+                        type="button"
+                        onClick={() => removeItem(item.game.id)}
+                    >
+                        <TrashAlt />
+                    </button>
                 </div>
             </div>
         </section>

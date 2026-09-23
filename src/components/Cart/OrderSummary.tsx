@@ -1,18 +1,7 @@
-import type { CartItem } from '../../type/cart'
+import { useCart } from '../../context/useCart'
 
-type OrderSummaryProps = {
-    items: CartItem[]
-}
-export const OrderSummary = ({ items }: OrderSummaryProps) => {
-    const subtotal = items
-        .reduce((total, item) => item.quantity * item.price + total, 0)
-        .toFixed(2)
-
-    const estimatedTax = items
-        .reduce((total, item) => item.price * 0.12 * item.quantity + total, 0)
-        .toFixed(2)
-
-    const totalItems = items.reduce((total, item) => item.quantity + total, 0)
+export const OrderSummary = () => {
+    const { totalItems, totalPrice, estimatedTax } = useCart()
 
     return (
         <div>
@@ -20,7 +9,7 @@ export const OrderSummary = ({ items }: OrderSummaryProps) => {
                 <h2>Order Summary</h2>
                 <div>
                     <h4>Items({totalItems})</h4>
-                    <p>${subtotal}</p>
+                    <p>${totalPrice}</p>
                 </div>
 
                 <div>
@@ -37,7 +26,7 @@ export const OrderSummary = ({ items }: OrderSummaryProps) => {
             <div>
                 <div>
                     <h2>Total</h2>
-                    <h2>${Number(subtotal) + Number(estimatedTax)}</h2>
+                    <h2>${totalPrice + estimatedTax}</h2>
                 </div>
 
                 <button type="button">Proceed to Checkout</button>
