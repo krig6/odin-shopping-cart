@@ -1,5 +1,32 @@
 import { Link } from 'react-router'
 import { ChevronLeft } from '@boxicons/react'
+import { mockGames } from '../../data/mockGames'
+import { CartProduct } from './CartProduct'
+
+const MOCK_CART_ITEMS = [
+    {
+        game: mockGames[0],
+        quantity: 3,
+        price: 49.99,
+    },
+
+    {
+        game: mockGames[1],
+        quantity: 5,
+        price: 49.99,
+    },
+    {
+        game: mockGames[2],
+        quantity: 2,
+        price: 49.99,
+    },
+
+    {
+        game: mockGames[3],
+        quantity: 4,
+        price: 49.99,
+    },
+]
 
 export const Cart = () => {
     return (
@@ -19,7 +46,11 @@ export const Cart = () => {
             </div>
 
             <div>
-                <div className="cart-items"></div>
+                <section>
+                    {MOCK_CART_ITEMS.map((item) => (
+                        <CartProduct item={item} />
+                    ))}
+                </section>
                 <div className="order-summary"></div>
             </div>
         </div>
