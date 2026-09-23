@@ -29,11 +29,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
             )
 
             if (existingItem) {
-                return prevItems.map((item) =>
-                    item.game.id === game.id
-                        ? { ...item, quantity: item.quantity + 1 }
-                        : item
-                )
+                return prevItems
             }
 
             return [...prevItems, { game, quantity: 1, price: 49.99 }]
