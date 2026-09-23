@@ -9,12 +9,12 @@ export const OrderSummary = () => {
                 <h2>Order Summary</h2>
                 <div>
                     <h4>Items({totalItems})</h4>
-                    <p>${totalPrice}</p>
+                    <p>${totalPrice.toFixed(2)}</p>
                 </div>
 
                 <div>
                     <h4>Estimated Tax</h4>
-                    <p>${estimatedTax}</p>
+                    <p>${estimatedTax.toFixed(2)}</p>
                 </div>
 
                 <div>
@@ -26,7 +26,7 @@ export const OrderSummary = () => {
             <div>
                 <div>
                     <h2>Total</h2>
-                    <h2>${totalPrice + estimatedTax}</h2>
+                    <h2>${(totalPrice + estimatedTax).toFixed(2)}</h2>
                 </div>
 
                 <button type="button">Proceed to Checkout</button>
