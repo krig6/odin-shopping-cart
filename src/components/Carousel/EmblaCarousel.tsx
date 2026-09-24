@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { fetchGames } from '../../services/gameService'
 import { CarouselSlide } from './CarouselSlide'
 import type { Game } from '../../type/game'
@@ -7,6 +7,7 @@ import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 import './embla.css'
 import type { EmblaOptionsType } from 'embla-carousel'
 import { Circle } from '@boxicons/react'
+import Autoplay from 'embla-carousel-autoplay'
 
 type PropType = {
     options?: EmblaOptionsType
@@ -15,7 +16,8 @@ type PropType = {
 
 export const EmblaCarousel = (props: PropType) => {
     const { options, startIndex } = props
-    const [emblaRef, emblaApi] = useEmblaCarousel(options)
+    const autoplay = useRef(Autoplay({ delay: 5000, stopOnInteraction: false }))
+    const [emblaRef, emblaApi] = useEmblaCarousel(options, [autoplay.current])
     const [games, setGames] = useState<Game[]>([])
 
     const { selectedIndex, scrollSnaps, onDotButtonClick } =
