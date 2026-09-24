@@ -4,11 +4,12 @@ const LINKS = [
     { to: '/', label: 'Home' },
     { to: '/shop', label: 'Shop' },
     { to: '/cart', label: 'Cart' },
+    { to: '/wishlist', label: 'Wishlist' },
 ]
 
 export const Navbar = () => (
-    <nav className="flex-1">
-        <ul className="flex justify-center gap-10">
+    <nav>
+        <ul className="flex flex-col items-center gap-6 lg:flex-row">
             {LINKS.map((link) => (
                 <li key={link.label}>
                     <Link
