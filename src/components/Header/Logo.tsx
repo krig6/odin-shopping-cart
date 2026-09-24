@@ -4,15 +4,13 @@ import logo from '../../assets/images/logo.svg'
 export const Logo = () => (
     <Link
         to="/"
-        className="group flex shrink-0 items-center gap-2.5 text-xl font-bold tracking-tight text-white"
+        className="group flex shrink-0 items-center gap-2.5 text-xl font-bold tracking-tight"
     >
         <img
-            className="h-10 w-auto transition-transform duration-300 ease-out group-hover:scale-110"
+            className="h-15 w-auto transition-transform duration-300 ease-out group-hover:scale-110"
             src={logo}
-            alt="GameHaven"
+            alt="Odinforge"
         />
-        <span>
-            Game<span className="text-blue-500">Haven</span>
-        </span>
+        <span className="text-[#F2E4D1]">Odinforge</span>
     </Link>
 )
