@@ -3,10 +3,9 @@ import { fetchGames } from '../../services/gameService'
 import { CarouselSlide } from './CarouselSlide'
 import type { Game } from '../../type/game'
 import useEmblaCarousel from 'embla-carousel-react'
-import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 import './embla.css'
 import type { EmblaOptionsType } from 'embla-carousel'
-import { Circle } from '@boxicons/react'
+import { ChevronDown, ChevronUp } from '@boxicons/react'
 import Autoplay from 'embla-carousel-autoplay'
 
 type PropType = {
@@ -19,9 +18,6 @@ export const EmblaCarousel = (props: PropType) => {
     const autoplay = useRef(Autoplay({ delay: 5000, stopOnInteraction: false }))
     const [emblaRef, emblaApi] = useEmblaCarousel(options, [autoplay.current])
     const [games, setGames] = useState<Game[]>([])
-
-    const { selectedIndex, scrollSnaps, onDotButtonClick } =
-        useDotButton(emblaApi)
 
     useEffect(() => {
         fetchGames({
@@ -48,21 +44,23 @@ export const EmblaCarousel = (props: PropType) => {
                 </div>
             </div>
 
-            <div className="embla__controls">
-                <div className="embla__dots">
-                    {scrollSnaps.map((_, index) => (
-                        <DotButton
-                            key={index}
-                            onClick={() => onDotButtonClick(index)}
-                        >
-                            {index === selectedIndex ? (
-                                <Circle pack="filled" fill="#FFFFFF" />
-                            ) : (
-                                <Circle fill="#64768b" height={12} width={12} />
-                            )}
-                        </DotButton>
-                    ))}
-                </div>
+            <div className="embla__arrows">
+                <button
+                    type="button"
+                    className="embla__arrow"
+                    aria-label="Previous slide"
+                    onClick={() => emblaApi?.scrollPrev()}
+                >
+                    <ChevronUp />
+                </button>
+                <button
+                    type="button"
+                    className="embla__arrow"
+                    aria-label="Next slide"
+                    onClick={() => emblaApi?.scrollNext()}
+                >
+                    <ChevronDown />
+                </button>
             </div>
         </div>
     )
