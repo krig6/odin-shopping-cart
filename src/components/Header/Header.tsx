@@ -46,8 +46,8 @@ export const Header = () => {
             <div
                 className={`absolute top-full left-0 flex h-screen w-full flex-col gap-6 bg-[#0d1b2e] px-8 py-6 shadow-lg transition-transform duration-300 ease-out lg:hidden ${
                     isMenuOpen
-                        ? 'translate-x-0'
-                        : 'pointer-events-none translate-x-full'
+                        ? 'z-50 translate-x-0'
+                        : 'pointer-events-none z-50 translate-x-full'
                 }`}
             >
                 <Navbar />
