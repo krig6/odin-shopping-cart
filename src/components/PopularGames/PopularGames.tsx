@@ -8,7 +8,7 @@ export const PopularGames = () => {
 
     useEffect(() => {
         fetchGames({
-            dates: '2024-01-01,2025-12-31',
+            ordering: '-added',
             page_size: 6,
         }).then(({ games }) => {
             setGames(games)
