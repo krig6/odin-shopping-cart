@@ -8,23 +8,26 @@ export const Cart = () => {
     const { items } = useCart()
 
     return (
-        <div className="text-amber-50">
-            <div>
-                <header className="flex items-end justify-between">
-                    <div>
-                        <h1>Your Cart</h1>
-                        <p>Review your games before checking out</p>
+        <div className="mt-8 flex flex-col gap-2 text-[#F2E4D1] lg:mx-60">
+            <div className="flex flex-col gap-2">
+                <Link to="/shop" className="flex w-fit items-center">
+                    <ChevronLeft size="md" />
+                    <span className="text-md">Continue Shopping</span>
+                </Link>
+                <header className="mx-3">
+                    <div className="flex flex-col gap-2">
+                        <h1 className="text-2xl font-bold">Your Cart</h1>
+                        <p className="text-sm">
+                            {items.length >= 1
+                                ? 'Review your games before checkout'
+                                : 'Browse games and find your next favorite.'}
+                        </p>
                     </div>
-
-                    <Link to="/shop" className="flex">
-                        <ChevronLeft />
-                        Continue Shopping
-                    </Link>
                 </header>
             </div>
 
-            <div>
-                <section>
+            <div className="flex">
+                <section className="m-2 flex flex-1 flex-col gap-3">
                     {items.map((item) => (
                         <CartProduct key={item.game.id} item={item} />
                     ))}
