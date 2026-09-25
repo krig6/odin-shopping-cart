@@ -2,11 +2,14 @@ import { useCart } from '../../context/useCart'
 import { Cart } from '@boxicons/react'
 import type { Game } from '../../type/game'
 
-type PopularGameCardProps = {
+type GameCardProps = {
     game: Game
 }
 
-export const PopularGameCard = ({ game }: PopularGameCardProps) => {
+export const gameCardWrapperClass =
+    'w-[42vw] max-w-48 min-w-44 shrink-0 snap-start xl:w-full xl:max-w-none xl:min-w-0 xl:basis-[calc((100%_-_5rem)/6)]'
+
+export const GameCard = ({ game }: GameCardProps) => {
     const { addItem } = useCart()
     return (
         <article className="rounded-lg border border-gray-600 text-[#F2E4D1]">
