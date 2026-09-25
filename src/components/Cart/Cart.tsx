@@ -8,7 +8,7 @@ export const Cart = () => {
     const { items } = useCart()
 
     return (
-        <div className="mt-8 flex flex-col gap-2 text-[#F2E4D1] lg:mx-60">
+        <div className="mt-8 flex flex-col gap-2 text-[#F2E4D1] lg:mx-10 xl:mx-40">
             <div className="flex flex-col gap-2">
                 <Link to="/shop" className="flex w-fit items-center">
                     <ChevronLeft size="md" />
@@ -26,7 +26,7 @@ export const Cart = () => {
                 </header>
             </div>
 
-            <div className="flex">
+            <div className="flex flex-col gap-8 lg:flex-row">
                 <section className="m-2 flex flex-1 flex-col gap-3">
                     {items.map((item) => (
                         <CartProduct key={item.game.id} item={item} />
