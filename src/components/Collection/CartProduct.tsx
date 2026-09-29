@@ -87,7 +87,7 @@ export const CartProduct = ({ item }: CartProductProps) => {
             <div className="mt-auto mr-2 ml-auto flex items-center gap-2 lg:m-auto lg:ml-10">
                 <button
                     type="button"
-                    className={`hove flex shrink-0 cursor-pointer items-center justify-center rounded-md p-2 text-[#7f7f7f] transition ${isInWishlist ? 'hover:bg-[#F5D77A]' : ''} hover:text-[#E5C158] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 ${isInWishlist ? 'bg-[#E5C158]' : ''}`}
+                    className={`flex shrink-0 cursor-pointer items-center justify-center rounded-md p-2 text-[#7f7f7f] transition ${isInWishlist ? 'hover:bg-[#F5D77A]' : ''} hover:text-[#E5C158] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 ${isInWishlist ? 'bg-[#E5C158]' : ''}`}
                     aria-label={
                         isInWishlist
                             ? `Remove ${item.game.name} from wishlist`

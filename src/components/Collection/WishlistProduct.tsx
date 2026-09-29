@@ -1,7 +1,7 @@
 import { useWishlist } from '../../context/useWishlist'
 import { useCart } from '../../context/useCart'
 import type { WishlistItem } from '../../type/wishlist'
-import { Plus, Minus, Cart, Check, TrashAlt } from '@boxicons/react'
+import { Plus, Minus, Cart, TrashAlt } from '@boxicons/react'
 
 type WishlistProductProps = {
     item: WishlistItem
@@ -87,7 +87,7 @@ export const WishlistProduct = ({ item }: WishlistProductProps) => {
             <div className="mt-auto mr-2 ml-auto flex items-center gap-2 lg:m-auto lg:ml-10">
                 <button
                     type="button"
-                    className={`hove flex shrink-0 cursor-pointer items-center justify-center rounded-md p-2 text-[#7f7f7f] transition ${isInCart ? 'hover:bg-[#F5D77A]' : ''} hover:text-[#E5C158] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 ${isInCart ? 'bg-[#E5C158]' : ''}`}
+                    className={`flex shrink-0 cursor-pointer items-center justify-center rounded-md p-2 text-[#7f7f7f] transition ${isInCart ? 'hover:bg-[#F5D77A]' : ''} hover:text-[#E5C158] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 ${isInCart ? 'bg-[#E5C158]' : ''}`}
                     aria-label={
                         isInCart
                             ? `Remove ${item.game.name} from cart`
@@ -105,7 +105,7 @@ export const WishlistProduct = ({ item }: WishlistProductProps) => {
                     className="cursor-pointer rounded p-1 text-[#F2E4D1] transition-colors hover:bg-red-500/15 hover:text-red-400 focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:outline-none active:scale-95 lg:p-2"
                     type="button"
                     aria-label={`Remove ${item.game.name} from wishlist`}
-                    onClick={() => removeItemFromCart(item.game.id)}
+                    onClick={() => removeItemFromWishlist(item.game.id)}
                 >
                     <TrashAlt
                         height={14}
