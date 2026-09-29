@@ -8,7 +8,7 @@ export const Wishlist = () => {
 
     return (
         <CollectionPage
-            title="Your Wishlist"
+            title="My Wishlist"
             subtitle="Review your saved games"
             isEmpty={items.length === 0}
             emptyState={<CollectionEmpty message="Your wishlist is empty." />}

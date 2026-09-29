@@ -1,5 +1,6 @@
 import { useCart } from '../../context/useCart'
-import { Cart } from '@boxicons/react'
+import { useWishlist } from '../../context/useWishlist'
+import { Cart, Heart } from '@boxicons/react'
 import type { Game } from '../../type/game'
 
 type GameCardProps = {
@@ -10,7 +11,39 @@ export const gameCardWrapperClass =
     'w-[42vw] max-w-48 min-w-44 shrink-0 snap-start xl:w-full xl:max-w-none xl:min-w-0 xl:basis-[calc((100%_-_5rem)/6)]'
 
 export const GameCard = ({ game }: GameCardProps) => {
-    const { addItem } = useCart()
+    const {
+        addItem: addItemToCart,
+        removeItem: removeItemFromCart,
+        items: cartItems,
+    } = useCart()
+
+    const {
+        addItem: addItemToWishlist,
+        removeItem: removeItemFromWishlist,
+        items: wishlistItems,
+    } = useWishlist()
+
+    const isInWishlist = wishlistItems.some((item) => item.game.id === game.id)
+    const isInCart = cartItems.some((item) => item.game.id === game.id)
+
+    const handleWishlistClick = () => {
+        if (isInWishlist) {
+            removeItemFromWishlist(game.id)
+            return
+        }
+
+        addItemToWishlist(game)
+    }
+
+    const handleCartClick = () => {
+        if (isInCart) {
+            removeItemFromCart(game.id)
+            return
+        }
+
+        addItemToCart(game)
+    }
+
     return (
         <article className="rounded-lg border border-gray-600 text-[#F2E4D1]">
             <img
@@ -31,14 +64,39 @@ export const GameCard = ({ game }: GameCardProps) => {
                         </p>
                     </div>
 
-                    <button
-                        type="button"
-                        className="flex shrink-0 cursor-pointer items-center justify-center rounded-md bg-gray-700 p-2 text-[#7f7f7f] transition hover:bg-[#E5C158] hover:text-[#0d1b2e] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95"
-                        aria-label={`Add ${game.name} to cart`}
-                        onClick={() => addItem(game)}
-                    >
-                        <Cart size="sm" fill="currentColor" />
-                    </button>
+                    <div className="flex shrink-0 items-center gap-1.5">
+                        <button
+                            type="button"
+                            className={`flex shrink-0 cursor-pointer items-center justify-center rounded-md p-2 text-[#7f7f7f] transition hover:bg-[#E5C158] hover:text-[#0d1b2e] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 ${isInWishlist ? 'bg-[#E5C158]' : 'bg-gray-700'}`}
+                            aria-label={
+                                isInWishlist
+                                    ? `Remove ${game.name} from wishlist`
+                                    : `Add ${game.name} to wishlist`
+                            }
+                            onClick={handleWishlistClick}
+                        >
+                            <Heart
+                                size="sm"
+                                fill={isInWishlist ? '#000000' : 'currentColor'}
+                            />
+                        </button>
+
+                        <button
+                            type="button"
+                            className={`flex shrink-0 cursor-pointer items-center justify-center rounded-md p-2 text-[#7f7f7f] transition hover:bg-[#E5C158] hover:text-[#0d1b2e] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 ${isInCart ? 'bg-[#E5C158]' : 'bg-gray-700'}`}
+                            aria-label={
+                                isInCart
+                                    ? `Remove ${game.name} from cart`
+                                    : `Add ${game.name} to cart`
+                            }
+                            onClick={handleCartClick}
+                        >
+                            <Cart
+                                size="sm"
+                                fill={isInCart ? '#000000' : 'currentColor'}
+                            />
+                        </button>
+                    </div>
                 </div>
             </div>
         </article>
