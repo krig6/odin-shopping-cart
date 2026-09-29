@@ -1,13 +1,33 @@
 import { useWishlist } from '../../context/useWishlist'
+import { useCart } from '../../context/useCart'
 import type { WishlistItem } from '../../type/wishlist'
-import { Plus, Minus, TrashAlt } from '@boxicons/react'
+import { Plus, Minus, Cart, Check, TrashAlt } from '@boxicons/react'
 
 type WishlistProductProps = {
     item: WishlistItem
 }
 
 export const WishlistProduct = ({ item }: WishlistProductProps) => {
-    const { updateQuantity, removeItem } = useWishlist()
+    const { updateQuantity, removeItem: removeItemFromWishlist } = useWishlist()
+    const {
+        addItem: addItemToCart,
+        removeItem: removeItemFromCart,
+        items: cartItems,
+    } = useCart()
+
+    const isInCart = cartItems.some(
+        (cartItem) => cartItem.game.id === item.game.id
+    )
+
+    const handleWishlistClick = () => {
+        if (isInCart) {
+            removeItemFromCart(item.game.id)
+            return
+        }
+
+        addItemToCart(item.game)
+    }
+
     return (
         <div className="flex rounded-[18px] border border-gray-600 bg-gray-800 p-2.5 lg:rounded-[28px] lg:p-5">
             <img
@@ -64,12 +84,28 @@ export const WishlistProduct = ({ item }: WishlistProductProps) => {
                 </div>
             </div>
 
-            <div className="mt-auto mr-2 ml-auto lg:m-auto lg:ml-10">
+            <div className="mt-auto mr-2 ml-auto flex items-center gap-2 lg:m-auto lg:ml-10">
+                <button
+                    type="button"
+                    className={`hove flex shrink-0 cursor-pointer items-center justify-center rounded-md p-2 text-[#7f7f7f] transition ${isInCart ? 'hover:bg-[#F5D77A]' : ''} hover:text-[#E5C158] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 ${isInCart ? 'bg-[#E5C158]' : ''}`}
+                    aria-label={
+                        isInCart
+                            ? `Remove ${item.game.name} from cart`
+                            : `Add ${item.game.name} to cart`
+                    }
+                    onClick={handleWishlistClick}
+                >
+                    <Cart
+                        size="sm"
+                        fill={isInCart ? '#000000' : 'currentColor'}
+                    />
+                </button>
+
                 <button
                     className="cursor-pointer rounded p-1 text-[#F2E4D1] transition-colors hover:bg-red-500/15 hover:text-red-400 focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:outline-none active:scale-95 lg:p-2"
                     type="button"
                     aria-label={`Remove ${item.game.name} from wishlist`}
-                    onClick={() => removeItem(item.game.id)}
+                    onClick={() => removeItemFromCart(item.game.id)}
                 >
                     <TrashAlt
                         height={14}
