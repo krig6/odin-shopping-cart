@@ -2,6 +2,7 @@ import { Link } from 'react-router'
 import { ChevronLeft } from '@boxicons/react'
 import { CartProduct } from './CartProduct'
 import { OrderSummary } from './OrderSummary'
+import { EmptyCart } from './EmptyCart'
 import { useCart } from '../../context/useCart'
 
 export const Cart = () => {
@@ -16,12 +17,16 @@ export const Cart = () => {
                 </Link>
                 <header className="mx-3">
                     <div className="flex flex-col gap-2">
-                        <h1 className="text-2xl font-bold">Your Cart</h1>
-                        <p className="text-sm">
-                            {items.length >= 1
-                                ? 'Review your games before checkout'
-                                : 'Browse games and find your next favorite.'}
-                        </p>
+                        <h1 className="text-2xl font-bold lg:text-4xl">
+                            My Cart
+                        </h1>
+                        {items.length >= 1 ? (
+                            <p className="text-sm">
+                                Review your games before checkout
+                            </p>
+                        ) : (
+                            <EmptyCart />
+                        )}
                     </div>
                 </header>
             </div>
@@ -32,7 +37,7 @@ export const Cart = () => {
                         <CartProduct key={item.game.id} item={item} />
                     ))}
                 </section>
-                <OrderSummary />
+                {items.length >= 1 && <OrderSummary />}
             </div>
         </div>
     )
