@@ -67,7 +67,7 @@ export const GameCard = ({ game }: GameCardProps) => {
                     <div className="flex shrink-0 items-center gap-1.5">
                         <button
                             type="button"
-                            className={`flex shrink-0 cursor-pointer items-center justify-center rounded-md p-2 text-[#7f7f7f] transition hover:bg-[#E5C158] hover:text-[#0d1b2e] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 ${isInWishlist ? 'bg-[#E5C158]' : 'bg-gray-700'}`}
+                            className={`flex shrink-0 cursor-pointer items-center justify-center rounded-md p-2 text-[#7f7f7f] transition ${isInWishlist ? 'hover:bg-[#F5D77A]' : ''} hover:text-[#e5c158] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 ${isInWishlist ? 'bg-[#E5C158]' : 'bg-gray-700'}`}
                             aria-label={
                                 isInWishlist
                                     ? `Remove ${game.name} from wishlist`
@@ -83,7 +83,7 @@ export const GameCard = ({ game }: GameCardProps) => {
 
                         <button
                             type="button"
-                            className={`flex shrink-0 cursor-pointer items-center justify-center rounded-md p-2 text-[#7f7f7f] transition hover:bg-[#E5C158] hover:text-[#0d1b2e] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 ${isInCart ? 'bg-[#E5C158]' : 'bg-gray-700'}`}
+                            className={`flex shrink-0 cursor-pointer items-center justify-center rounded-md p-2 text-[#7f7f7f] transition ${isInCart ? 'hover:bg-[#F5D77A]' : ''} hover:text-[#E5C158] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 ${isInCart ? 'bg-[#E5C158]' : 'bg-gray-700'}`}
                             aria-label={
                                 isInCart
                                     ? `Remove ${game.name} from cart`
