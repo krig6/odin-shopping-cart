@@ -33,11 +33,11 @@ export const GameCard = ({ game }: GameCardProps) => {
 
                     <button
                         type="button"
-                        className="flex shrink-0 cursor-pointer items-center justify-center rounded-md bg-gray-700 p-2 text-gray-50 focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none"
+                        className="flex shrink-0 cursor-pointer items-center justify-center rounded-md bg-gray-700 p-2 text-[#7f7f7f] transition hover:bg-[#E5C158] hover:text-[#0d1b2e] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95"
                         aria-label={`Add ${game.name} to cart`}
                         onClick={() => addItem(game)}
                     >
-                        <Cart size="sm" fill="#7f7f7f" />
+                        <Cart size="sm" fill="currentColor" />
                     </button>
                 </div>
             </div>

@@ -36,7 +36,7 @@ export const OrderSummary = () => {
 
                 <button
                     type="button"
-                    className="cursor-pointer rounded-md bg-gray-700 p-2 text-lg font-bold text-gray-50"
+                    className="cursor-pointer rounded-md bg-gray-700 p-2 text-lg font-bold text-gray-50 transition-colors hover:bg-[#E5C158] hover:text-[#0d1b2e] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95"
                 >
                     Checkout
                 </button>
