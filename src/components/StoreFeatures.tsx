@@ -24,16 +24,20 @@ const STORE_FEATURES = [
 ]
 
 export const StoreFeatures = () => (
-    <section className="flex justify-between rounded-md bg-gray-500 p-5 text-white">
+    <section className="grid grid-cols-2 gap-2 text-[#F2E4D1] lg:flex lg:gap-4">
         {STORE_FEATURES.map((feature) => (
             <article
                 key={feature.title}
-                className="flex flex-row items-center justify-center gap-3 text-center"
+                className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-gray-700 p-3 text-center lg:flex-1 lg:flex-row lg:justify-center lg:gap-4"
             >
-                {feature.icon}
-                <div>
-                    <h4 className="font-semibold">{feature.title}</h4>
-                    <p className="text-xs">{feature.description}</p>
+                <div className="text-[#F2E4D1]">{feature.icon}</div>
+                <div className="flex flex-col items-center gap-0.5">
+                    <h4 className="text-xs leading-snug font-semibold sm:text-sm lg:text-base">
+                        {feature.title}
+                    </h4>
+                    <p className="text-[11px] font-medium sm:text-xs lg:text-sm">
+                        {feature.description}
+                    </p>
                 </div>
             </article>
         ))}
