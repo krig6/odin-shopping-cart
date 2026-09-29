@@ -30,7 +30,7 @@ export const RecentlyUpdated = () => {
 
     return (
         <section className="text-[#F2E4D1] md:mx-1">
-            <div className="flex items-center justify-between gap-4 py-5">
+            <div className="mb-5 flex items-center justify-between gap-4">
                 <h2 className="text-xl font-bold">Recently Updated</h2>
 
                 <div className="flex items-center gap-2">
@@ -47,7 +47,7 @@ export const RecentlyUpdated = () => {
                 </div>
             </div>
 
-            <div className="overflow-hidden pb-4" ref={emblaRef}>
+            <div className="overflow-hidden" ref={emblaRef}>
                 <div className="flex touch-pan-y">
                     {games.map((game) => (
                         <div

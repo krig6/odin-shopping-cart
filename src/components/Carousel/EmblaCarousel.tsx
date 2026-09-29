@@ -35,7 +35,7 @@ export const EmblaCarousel = (props: PropType) => {
     }, [emblaApi, games, startIndex])
 
     return (
-        <div className="embla">
+        <div className="embla mt-5">
             <div className="embla__viewport" ref={emblaRef}>
                 <div className="embla__container">
                     {games.map((game) => (

@@ -18,8 +18,8 @@ export const PopularGames = () => {
 
     return (
         <section className="text-[#F2E4D1] md:mx-1">
-            <h2 className="py-5 text-xl font-bold">Popular Games</h2>
-            <div className="popular-games-scroller flex snap-x snap-mandatory gap-4 overflow-visible overflow-x-auto pb-4 xl:grid xl:w-full xl:grid-cols-6">
+            <h2 className="mb-5 text-xl font-bold">Popular Games</h2>
+            <div className="popular-games-scroller flex snap-x snap-mandatory gap-4 overflow-visible overflow-x-auto xl:grid xl:w-full xl:grid-cols-6">
                 {games.map((game) => (
                     <div key={game.id} className={gameCardWrapperClass}>
                         <GameCard game={game} />
