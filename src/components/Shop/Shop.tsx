@@ -16,7 +16,7 @@ export const Shop = () => {
         fetchGames({
             genres: selectedGenres.join(','),
             page: 1,
-            page_size: 15,
+            page_size: 18,
         }).then(({ games, count }) => {
             setGames(games)
             setCount(count)
