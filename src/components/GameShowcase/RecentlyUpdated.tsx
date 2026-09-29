@@ -9,6 +9,7 @@ export const RecentlyUpdated = () => {
     const [emblaRef, emblaApi] = useEmblaCarousel({
         axis: 'x',
         loop: true,
+        dragFree: true,
     })
     const [games, setGames] = useState<Game[]>([])
     const {
@@ -47,9 +48,12 @@ export const RecentlyUpdated = () => {
             </div>
 
             <div className="overflow-hidden pb-4" ref={emblaRef}>
-                <div className="flex touch-pan-y gap-4">
+                <div className="flex touch-pan-y">
                     {games.map((game) => (
-                        <div key={game.id} className={gameCardWrapperClass}>
+                        <div
+                            key={game.id}
+                            className={`${gameCardWrapperClass} ml-4`}
+                        >
                             <GameCard game={game} />
                         </div>
                     ))}
