@@ -27,7 +27,7 @@ export const CallToAction = () => (
             <Link to="/shop" className="mt-2 inline-block">
                 <button
                     type="button"
-                    className="cursor-pointer rounded-lg bg-[#E5C158] px-6 py-3 text-base font-bold text-gray-700 transition hover:bg-gray-600 focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 sm:px-8 sm:py-3.5 sm:text-lg"
+                    className="cursor-pointer rounded-lg bg-[#E5C158] px-6 py-3 text-base font-bold text-gray-700 transition hover:bg-[#F5D77A] hover:text-[#0d1b2e] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 sm:px-8 sm:py-3.5 sm:text-lg"
                 >
                     Shop Now
                 </button>
