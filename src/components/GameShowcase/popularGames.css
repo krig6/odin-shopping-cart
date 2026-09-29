@@ -1,0 +1,34 @@
+.popular-games-scroller::-webkit-scrollbar {
+    height: 6px;
+}
+
+.popular-games-scroller::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.popular-games-scroller::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgba(242, 228, 209, 0.28);
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.popular-games-scroller:hover::-webkit-scrollbar-thumb {
+    background: rgba(229, 193, 88, 0.7);
+}
+
+.popular-games-scroller::-webkit-scrollbar-thumb:hover {
+    background: #e5c158;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    .popular-games-scroller {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(242, 228, 209, 0.35) transparent;
+        transition: scrollbar-color 0.2s ease;
+    }
+
+    .popular-games-scroller:hover {
+        scrollbar-color: #e5c158 transparent;
+    }
+}
