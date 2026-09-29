@@ -5,9 +5,10 @@ import './index.css'
 import { App } from './App'
 import { Homepage } from './components/Homepage/Homepage'
 import { Shop } from './components/Shop/Shop'
-import { Cart } from './components/Cart/Cart'
-import { Wishlist } from './components/Header/Wishlist'
+import { Cart } from './components/Collection/Cart'
+import { Wishlist } from './components/Collection/Wishlist'
 import { CartProvider } from './context/CartProvider'
+import { WishlistProvider } from './context/WishlistProvider'
 
 const router = createBrowserRouter([
     {
@@ -25,7 +26,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <CartProvider>
-            <RouterProvider router={router} />
+            <WishlistProvider>
+                <RouterProvider router={router} />
+            </WishlistProvider>
         </CartProvider>
     </StrictMode>
 )
