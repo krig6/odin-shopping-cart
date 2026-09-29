@@ -3,10 +3,13 @@ import { Link } from 'react-router'
 import { Navbar } from './Navbar'
 import { SearchBox } from './SearchBox'
 import { Logo } from './Logo'
+import { CartCountBadge } from './CartCountBadge'
+import { useCart } from '../../context/useCart'
 import { Menu, X, Cart } from '@boxicons/react'
 
 export const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+    const { totalItems } = useCart()
 
     return (
         <header className="relative flex items-center gap-10 p-4 text-[#F2E4D1] max-[425px]:gap-4 md:px-8 md:py-5 md:text-lg">
@@ -21,10 +24,13 @@ export const Header = () => {
 
                 <Link
                     to="/cart"
-                    aria-label="Cart"
-                    className="cursor-pointer transition-colors hover:text-[#E5C158] lg:hidden"
+                    aria-label={
+                        totalItems > 0 ? `Cart, ${totalItems} items` : 'Cart'
+                    }
+                    className="relative cursor-pointer transition-colors hover:text-[#E5C158] lg:hidden"
                 >
                     <Cart fill="currentColor" />
+                    <CartCountBadge count={totalItems} />
                 </Link>
 
                 <button
