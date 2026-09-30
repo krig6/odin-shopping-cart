@@ -20,6 +20,7 @@ export type FetchGamesParams = {
     page_size?: number
     genres?: string
     page?: number
+    search?: string
 }
 
 export const fetchApiGames = async (
@@ -48,6 +49,10 @@ export const fetchApiGames = async (
 
     if (params?.page) {
         url.searchParams.set('page', String(params.page))
+    }
+
+    if (params?.search) {
+        url.searchParams.set('search', params.search)
     }
 
     const response = await fetch(url.toString(), { signal })

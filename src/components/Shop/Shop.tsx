@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import { useSearchParams } from 'react-router'
 import type { Game } from '../../type/game'
 import { GameGrid, gameGridClass } from './GameGrid'
 import { Filters } from './Filters'
@@ -32,8 +33,12 @@ export const Shop = () => {
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false)
 
     const genresKey = selectedGenres.join(',')
+    const [searchParams, setSearchParams] = useSearchParams()
+    const search = searchParams.get('search') ?? ''
+    const listKey = `${genresKey}|${search}`
     const { games, count, isPending, isFetching, error, refetch } = useGames({
         genres: genresKey,
+        search: search || undefined,
         page: 1,
         page_size: 10,
     })
@@ -71,24 +76,31 @@ export const Shop = () => {
         const nextPage = loadMore.page + 1
         const { games: nextGames } = await fetchGames({
             genres: genresKey,
+            search: search || undefined,
             page: nextPage,
             page_size: 10,
         })
 
         setLoadMore((prev) => ({
-            genresKey,
+            genresKey: listKey,
             page: nextPage,
             games: [...prev.games, ...nextGames],
         }))
         setIsLoadingMore(false)
     }
 
+    const handleClearSearch = () => {
+        const next = new URLSearchParams(searchParams)
+        next.delete('search')
+        setSearchParams(next)
+    }
+
     const allGames = useMemo(
         () =>
-            loadMore.genresKey === genresKey
+            loadMore.genresKey === listKey
                 ? [...games, ...loadMore.games]
                 : [...games],
-        [games, loadMore, genresKey]
+        [games, loadMore, listKey]
     )
 
     const filteredGames = allGames.filter(
@@ -140,6 +152,27 @@ export const Shop = () => {
                 </div>
 
                 <main className="mt-5 flex min-w-0 flex-1 flex-col">
+                    {search !== '' && (
+                        <div className="mb-4 flex items-center gap-2 text-sm text-[#F2E4D1]">
+                            <span>Results for:</span>
+
+                            <span className="flex min-w-0 items-center gap-1 rounded-full bg-[#334155] py-1 pr-1 pl-3 text-[#E5C158]">
+                                <span className="max-w-40 truncate">
+                                    {search}
+                                </span>
+
+                                <button
+                                    type="button"
+                                    onClick={handleClearSearch}
+                                    aria-label={`Clear search for ${search}`}
+                                    className="flex shrink-0 cursor-pointer items-center justify-center rounded-full text-[#F2E4D1] transition hover:text-[#E5C158] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none"
+                                >
+                                    <X size="xs" />
+                                </button>
+                            </span>
+                        </div>
+                    )}
+
                     <div
                         aria-busy={isFetching || isLoadingMore}
                         className={`transition-opacity duration-200 ${isFetching && !isPending ? 'opacity-60' : 'opacity-100'}`}
@@ -151,6 +184,12 @@ export const Shop = () => {
                                 message="We couldn't load these games."
                                 onRetry={refetch}
                             />
+                        ) : filteredGames.length === 0 ? (
+                            <p className="py-10 text-center text-sm text-[#F2E4D1]">
+                                {search !== ''
+                                    ? `No games match "${search}".`
+                                    : 'No games match these filters.'}
+                            </p>
                         ) : (
                             <GameGrid games={filteredGames} />
                         )}
