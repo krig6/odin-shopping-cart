@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
-import { fetchGames } from '../../services/gameService'
+import { useGames } from '../../hooks/useGames'
 import { GameCard, gameCardWrapperClass } from './GameCard'
-import type { Game } from '../../type/game'
+import { GameCardSkeleton, ErrorState } from '../Loading/Skeletons'
 import useEmblaCarousel from 'embla-carousel-react'
 import { NextButton, PrevButton, usePrevNextButtons } from './EmblaArrowButtons'
 
@@ -11,22 +10,16 @@ export const RecentlyUpdated = () => {
         loop: true,
         dragFree: true,
     })
-    const [games, setGames] = useState<Game[]>([])
+    const { games, isPending, error, refetch } = useGames({
+        ordering: '-updated',
+        page_size: 10,
+    })
     const {
         prevBtnDisabled,
         nextBtnDisabled,
         onPrevButtonClick,
         onNextButtonClick,
     } = usePrevNextButtons(emblaApi)
-
-    useEffect(() => {
-        fetchGames({
-            ordering: '-updated',
-            page_size: 10,
-        }).then(({ games }) => {
-            setGames(games)
-        })
-    }, [])
 
     return (
         <section className="text-[#F2E4D1] md:mx-1">
@@ -47,18 +40,42 @@ export const RecentlyUpdated = () => {
                 </div>
             </div>
 
-            <div className="overflow-hidden" ref={emblaRef}>
-                <div className="flex touch-pan-y">
-                    {games.map((game) => (
-                        <div
-                            key={game.id}
-                            className={`${gameCardWrapperClass} ml-4`}
-                        >
-                            <GameCard game={game} />
-                        </div>
-                    ))}
+            {error ? (
+                <ErrorState
+                    message="We couldn't load recently updated games."
+                    onRetry={refetch}
+                />
+            ) : (
+                <div
+                    className="overflow-hidden"
+                    ref={isPending ? undefined : emblaRef}
+                >
+                    <div
+                        className="flex touch-pan-y"
+                        role={isPending ? 'status' : undefined}
+                        aria-label={isPending ? 'Loading games' : undefined}
+                        aria-busy={isPending}
+                    >
+                        {isPending
+                            ? Array.from({ length: 10 }, (_, index) => (
+                                  <div
+                                      key={index}
+                                      className={`${gameCardWrapperClass} ml-4`}
+                                  >
+                                      <GameCardSkeleton />
+                                  </div>
+                              ))
+                            : games.map((game) => (
+                                  <div
+                                      key={game.id}
+                                      className={`${gameCardWrapperClass} ml-4`}
+                                  >
+                                      <GameCard game={game} />
+                                  </div>
+                              ))}
+                    </div>
                 </div>
-            </div>
+            )}
         </section>
     )
 }

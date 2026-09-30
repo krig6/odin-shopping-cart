@@ -1,30 +1,42 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import type { Game } from '../../type/game'
-import { GameGrid } from './GameGrid'
+import { GameGrid, gameGridClass } from './GameGrid'
 import { Filters } from './Filters'
 import { fetchGames } from '../../services/gameService'
+import { useGames } from '../../hooks/useGames'
+import {
+    ErrorState,
+    GameCardSkeleton,
+    GameGridSkeleton,
+    Spinner,
+} from '../Loading/Skeletons'
 import { MenuFilter, X } from '@boxicons/react'
+
+const SKELETON_COUNT = 10
+
+type LoadMoreState = {
+    genresKey: string
+    page: number
+    games: Game[]
+}
 
 export const Shop = () => {
     const [selectedGenres, setSelectedGenres] = useState<string[]>([])
     const [selectedRating, setSelectedRating] = useState<number | undefined>()
-    const [page, setPage] = useState<number>(1)
-    const [games, setGames] = useState<Game[]>([])
-    const [count, setCount] = useState<number>(0)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [loadMore, setLoadMore] = useState<LoadMoreState>({
+        genresKey: '',
+        page: 1,
+        games: [],
+    })
+    const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false)
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false)
 
-    useEffect(() => {
-        fetchGames({
-            genres: selectedGenres.join(','),
-            page: 1,
-            page_size: 50,
-        }).then(({ games, count }) => {
-            setGames(games)
-            setCount(count)
-            setIsLoading(false)
-        })
-    }, [selectedGenres])
+    const genresKey = selectedGenres.join(',')
+    const { games, count, isPending, isFetching, error, refetch } = useGames({
+        genres: genresKey,
+        page: 1,
+        page_size: 10,
+    })
 
     useEffect(() => {
         if (!isFilterOpen) return
@@ -43,13 +55,11 @@ export const Shop = () => {
     }, [isFilterOpen])
 
     const handleGenreChange = (slug: string) => {
-        setIsLoading(true)
         setSelectedGenres((prev) =>
             prev.includes(slug)
                 ? prev.filter((selectedSlug) => selectedSlug !== slug)
                 : [...prev, slug]
         )
-        setPage(1)
     }
 
     const handleRatingChange = (rating: number) => {
@@ -57,24 +67,35 @@ export const Shop = () => {
     }
 
     const handleLoadMore = async () => {
-        setIsLoading(true)
-        const nextPage = page + 1
+        setIsLoadingMore(true)
+        const nextPage = loadMore.page + 1
         const { games: nextGames } = await fetchGames({
-            genres: selectedGenres.join(','),
+            genres: genresKey,
             page: nextPage,
             page_size: 10,
         })
 
-        setGames((prev) => [...prev, ...nextGames])
-        setPage(nextPage)
-        setIsLoading(false)
+        setLoadMore((prev) => ({
+            genresKey,
+            page: nextPage,
+            games: [...prev.games, ...nextGames],
+        }))
+        setIsLoadingMore(false)
     }
 
-    const filteredGames = games.filter(
+    const allGames = useMemo(
+        () =>
+            loadMore.genresKey === genresKey
+                ? [...games, ...loadMore.games]
+                : [...games],
+        [games, loadMore, genresKey]
+    )
+
+    const filteredGames = allGames.filter(
         (game) => selectedRating === undefined || game.rating >= selectedRating
     )
 
-    const hasMore = games.length < count && isLoading !== true
+    const hasMore = error === null && allGames.length < count
 
     return (
         <div className="mt-5 px-2 pb-10 text-white lg:mx-auto lg:max-w-7xl">
@@ -119,16 +140,45 @@ export const Shop = () => {
                 </div>
 
                 <main className="mt-5 flex min-w-0 flex-1 flex-col">
-                    <GameGrid games={filteredGames} />
+                    <div
+                        aria-busy={isFetching || isLoadingMore}
+                        className={`transition-opacity duration-200 ${isFetching && !isPending ? 'opacity-60' : 'opacity-100'}`}
+                    >
+                        {isPending ? (
+                            <GameGridSkeleton count={SKELETON_COUNT} />
+                        ) : error ? (
+                            <ErrorState
+                                message="We couldn't load these games."
+                                onRetry={refetch}
+                            />
+                        ) : (
+                            <GameGrid games={filteredGames} />
+                        )}
+                    </div>
 
-                    {hasMore && (
+                    {isFetching && isPending === false && (
+                        <div
+                            className={`mt-4 ${gameGridClass}`}
+                            role="status"
+                            aria-label="Loading games"
+                        >
+                            {Array.from({ length: 5 }, (_, index) => (
+                                <GameCardSkeleton key={index} />
+                            ))}
+                        </div>
+                    )}
+
+                    {(hasMore || isLoadingMore) && (
                         <div className="mt-8 flex w-full justify-center">
                             <button
                                 type="button"
                                 onClick={handleLoadMore}
-                                className="cursor-pointer rounded-lg bg-[#E5C158] px-6 py-3 text-base font-bold text-gray-700 transition hover:bg-[#F5D77A] hover:text-[#0d1b2e] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 sm:px-8 sm:py-3.5 sm:text-lg"
+                                disabled={isLoadingMore}
+                                aria-busy={isLoadingMore}
+                                className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#E5C158] px-6 py-3 text-base font-bold text-gray-700 transition hover:bg-[#F5D77A] hover:text-[#0d1b2e] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 disabled:cursor-not-allowed disabled:opacity-60 sm:px-8 sm:py-3.5 sm:text-lg"
                             >
-                                Load More
+                                {isLoadingMore && <Spinner />}
+                                {isLoadingMore ? 'Loading' : 'Load More'}
                             </button>
                         </div>
                     )}

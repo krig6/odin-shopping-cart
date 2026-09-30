@@ -23,7 +23,8 @@ export type FetchGamesParams = {
 }
 
 export const fetchApiGames = async (
-    params?: FetchGamesParams
+    params?: FetchGamesParams,
+    signal?: AbortSignal
 ): Promise<GamesResponse> => {
     const url = new URL(`${RAWG_API_URL}/games`)
 
@@ -49,7 +50,7 @@ export const fetchApiGames = async (
         url.searchParams.set('page', String(params.page))
     }
 
-    const response = await fetch(url.toString())
+    const response = await fetch(url.toString(), { signal })
 
     if (!response.ok) {
         throw new Error('Failed to fetch games.')

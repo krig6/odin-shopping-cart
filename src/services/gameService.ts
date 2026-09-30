@@ -10,13 +10,14 @@ export type GamesResult = {
 }
 
 export const fetchGames = async (
-    params?: FetchGamesParams
+    params?: FetchGamesParams,
+    options?: { signal?: AbortSignal }
 ): Promise<GamesResult> => {
     if (USE_MOCK_DATA) {
         return fetchMockGames()
     }
 
-    const data = await fetchApiGames(params)
+    const data = await fetchApiGames(params, options?.signal)
 
     return {
         games: data.results.map((game) => ({

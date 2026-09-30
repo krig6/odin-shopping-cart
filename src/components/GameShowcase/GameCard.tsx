@@ -47,7 +47,7 @@ export const GameCard = ({ game }: GameCardProps) => {
     return (
         <article className="rounded-lg border border-gray-600 text-[#F2E4D1]">
             <img
-                className="h-30 w-auto rounded-t-lg object-cover md:h-40 xl:aspect-2/3 xl:h-full xl:object-cover"
+                className="h-30 w-full rounded-t-lg object-cover md:h-40 xl:aspect-2/3 xl:h-full xl:object-cover"
                 src={game.background_image}
                 alt={game.name}
             />
