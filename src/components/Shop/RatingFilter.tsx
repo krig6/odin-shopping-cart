@@ -11,8 +11,8 @@ export const RatingFilter = ({
     selectedRating,
     onChange,
 }: RatingFilterProps) => (
-    <fieldset className="flex flex-col gap-3">
-        <legend className="mb-3 text-sm font-semibold tracking-wide text-slate-400 uppercase">
+    <fieldset className="mb-4 flex flex-col gap-2">
+        <legend className="mb-1 text-sm font-semibold tracking-wide text-[#F2E4D1] uppercase">
             Rating
         </legend>
 
@@ -20,7 +20,7 @@ export const RatingFilter = ({
             <label
                 key={rating}
                 htmlFor={`rating-${rating}`}
-                className="flex cursor-pointer items-center gap-2 text-sm text-slate-300"
+                className="flex cursor-pointer items-center gap-2 text-sm text-[#F2E4D1]"
             >
                 <input
                     id={`rating-${rating}`}
@@ -49,9 +49,8 @@ export const RatingFilter = ({
                             />
                         )
                     )}
+                    {rating < 5 && <span className="ml-1"> & Up</span>}
                 </span>
-
-                <span>& Up</span>
             </label>
         ))}
     </fieldset>
