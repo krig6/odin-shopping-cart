@@ -2,7 +2,8 @@ import { useGames } from '../../hooks/useGames'
 import { GameCard, gameCardWrapperClass } from './GameCard'
 import { GameCardSkeleton, ErrorState } from '../Loading/Skeletons'
 import useEmblaCarousel from 'embla-carousel-react'
-import { NextButton, PrevButton, usePrevNextButtons } from './EmblaArrowButtons'
+import { NextButton, PrevButton } from './EmblaArrowButtons'
+import { usePrevNextButtons } from '../../hooks/usePrevNextButtons'
 
 export const RecentlyUpdated = () => {
     const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -14,12 +15,8 @@ export const RecentlyUpdated = () => {
         ordering: '-updated',
         page_size: 10,
     })
-    const {
-        prevBtnDisabled,
-        nextBtnDisabled,
-        onPrevButtonClick,
-        onNextButtonClick,
-    } = usePrevNextButtons(emblaApi)
+    const { onPrevButtonClick, onNextButtonClick } =
+        usePrevNextButtons(emblaApi)
 
     return (
         <section className="text-[#F2E4D1] md:mx-1">
@@ -28,12 +25,10 @@ export const RecentlyUpdated = () => {
 
                 <div className="flex items-center gap-2">
                     <PrevButton
-                        disabled={prevBtnDisabled}
                         onClick={onPrevButtonClick}
                         aria-label="Previous games"
                     />
                     <NextButton
-                        disabled={nextBtnDisabled}
                         onClick={onNextButtonClick}
                         aria-label="Next games"
                     />

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { useGames } from '../../hooks/useGames'
 import { CarouselSlide } from './CarouselSlide'
 import useEmblaCarousel from 'embla-carousel-react'
@@ -13,10 +13,11 @@ type PropType = {
     startIndex?: number
 }
 
+const autoplay = Autoplay({ delay: 5000, stopOnInteraction: false })
+
 export const EmblaCarousel = (props: PropType) => {
     const { options, startIndex } = props
-    const autoplay = useRef(Autoplay({ delay: 5000, stopOnInteraction: false }))
-    const [emblaRef, emblaApi] = useEmblaCarousel(options, [autoplay.current])
+    const [emblaRef, emblaApi] = useEmblaCarousel(options, [autoplay])
     const { games, isPending, error, refetch } = useGames({
         dates: '2026-01-01,2026-12-31',
         page_size: 5,
