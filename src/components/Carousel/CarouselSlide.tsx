@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import type { Game } from '../../type/game'
 
 type CarouselSlideProps = {
@@ -6,23 +7,31 @@ type CarouselSlideProps = {
 
 export const CarouselSlide = ({ game }: CarouselSlideProps) => (
     <article className="embla__slide">
-        <img src={game.background_image} alt={game.name} />
+        <img src={game.background_image} alt="" />
 
         <div className="embla__slide-overlay" />
 
-        <div className="embla__slide-content">
-            <h3 className="embla__slide-title">{game.name}</h3>
+        <Link
+            to={`/game/${game.id}`}
+            aria-label={`View ${game.name}`}
+            className="embla__slide-link"
+        >
+            <div className="embla__slide-content">
+                <h3 className="embla__slide-title">{game.name}</h3>
 
-            <span className="embla__slide-rating">
-                <span className="embla__slide-rating-star" aria-hidden="true">
-                    ★
+                <span className="embla__slide-rating">
+                    <span
+                        className="embla__slide-rating-star"
+                        aria-hidden="true"
+                    >
+                        ★
+                    </span>
+                    <span aria-label={`Rating: ${game.rating} out of 5`}>
+                        {game.rating.toFixed(1)}
+                    </span>
+                    <span className="embla__slide-rating-max">/ 5</span>
                 </span>
-                <span aria-label={`Rating: ${game.rating} out of 5`}>
-                    {game.rating.toFixed(1)}
-                </span>
-                <span className="embla__slide-rating-max">/ 5</span>
-            </span>
-        </div>
+            </div>
+        </Link>
     </article>
 )
-

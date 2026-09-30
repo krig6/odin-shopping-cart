@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { WishlistContext } from './WishlistContext'
 import type { WishlistItem } from '../type/wishlist'
 import type { Game } from '../type/game'
+import { GAME_PRICE } from '../config'
 
 type WishlistProviderProps = {
     children: ReactNode
@@ -30,7 +31,7 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
                 return prevItems
             }
 
-            return [...prevItems, { game, quantity: 1, price: 49.99 }]
+            return [...prevItems, { game, quantity: 1, price: GAME_PRICE }]
         })
     }
 

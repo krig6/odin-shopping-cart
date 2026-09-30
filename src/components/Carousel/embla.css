@@ -46,6 +46,13 @@
     );
 }
 
+.embla__slide-link {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    cursor: pointer;
+}
+
 .embla__slide-content {
     position: absolute;
     left: 2rem;
@@ -65,8 +72,19 @@
     font-size: 14px;
     font-weight: 700;
     line-height: 1.15;
+    transition: color 0.2s ease;
     text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
     overflow-wrap: anywhere;
+}
+
+.embla__slide-link:hover .embla__slide-title,
+.embla__slide-link:focus-visible .embla__slide-title {
+    color: #e5c158;
+}
+
+.embla__slide-link:focus-visible {
+    outline: 2px solid #e5c158;
+    outline-offset: -4px;
 }
 
 .embla__slide-rating {

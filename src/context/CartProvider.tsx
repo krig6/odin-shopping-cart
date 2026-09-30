@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { CartContext } from './CartContext'
 import type { CartItem } from '../type/cart'
 import type { Game } from '../type/game'
+import { GAME_PRICE } from '../config'
 
 type CartProviderProps = {
     children: ReactNode
@@ -32,7 +33,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
                 return prevItems
             }
 
-            return [...prevItems, { game, quantity: 1, price: 49.99 }]
+            return [...prevItems, { game, quantity: 1, price: GAME_PRICE }]
         })
     }
 

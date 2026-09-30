@@ -1,6 +1,7 @@
 import { useWishlist } from '../../context/useWishlist'
 import { useCart } from '../../context/useCart'
 import type { WishlistItem } from '../../type/wishlist'
+import { Link } from 'react-router'
 import { Plus, Minus, Cart, TrashAlt } from '@boxicons/react'
 
 type WishlistProductProps = {
@@ -29,12 +30,18 @@ export const WishlistProduct = ({ item }: WishlistProductProps) => {
     }
 
     return (
-        <div className="flex rounded-[18px] border border-gray-600 bg-gray-800 p-2.5 lg:rounded-[28px] lg:p-5">
-            <img
-                src={item.game.background_image}
-                alt={item.game.name}
-                className="h-30 w-25 rounded-lg object-cover lg:h-48 lg:w-40"
-            />
+        <div className="relative flex rounded-[18px] border border-gray-600 bg-gray-800 p-2.5 lg:rounded-[28px] lg:p-5">
+            <Link
+                to={`/game/${item.game.id}`}
+                aria-label={`View ${item.game.name}`}
+                className="shrink-0 cursor-pointer after:absolute after:inset-0 after:content-['']"
+            >
+                <img
+                    src={item.game.background_image}
+                    alt=""
+                    className="h-30 w-25 rounded-lg object-cover lg:h-48 lg:w-40"
+                />
+            </Link>
 
             <div className="ml-3 flex flex-1 flex-col justify-between text-sm lg:grid lg:grid-cols-3 lg:flex-row lg:items-center lg:gap-20">
                 <span className="lg:text-xl lg:font-bold">
@@ -47,7 +54,7 @@ export const WishlistProduct = ({ item }: WishlistProductProps) => {
                     </span>
                 </div>
 
-                <div className="flex w-fit items-center gap-2 rounded-md border border-gray-600 bg-gray-900 px-1 py-0.5 text-sm text-[#F2E4D1]">
+                <div className="relative z-10 flex w-fit items-center gap-2 rounded-md border border-gray-600 bg-gray-900 px-1 py-0.5 text-sm text-[#F2E4D1]">
                     <button
                         type="button"
                         aria-label={`Decrease quantity of ${item.game.name}`}
@@ -84,7 +91,7 @@ export const WishlistProduct = ({ item }: WishlistProductProps) => {
                 </div>
             </div>
 
-            <div className="mt-auto mr-2 ml-auto flex items-center gap-2 lg:m-auto lg:ml-10">
+            <div className="relative z-10 mt-auto mr-2 ml-auto flex items-center gap-2 lg:m-auto lg:ml-10">
                 <button
                     type="button"
                     className={`flex shrink-0 cursor-pointer items-center justify-center rounded-md p-2 text-[#7f7f7f] transition ${isInCart ? 'hover:bg-[#F5D77A]' : ''} hover:text-[#E5C158] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 ${isInCart ? 'bg-[#E5C158]' : ''}`}

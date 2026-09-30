@@ -14,6 +14,37 @@ type GamesResponse = {
     count: number
 }
 
+export type ApiGameDetail = ApiGame & {
+    description: string | null
+    metacritic: number | null
+    tba: boolean
+    playtime: number
+    ratings_count: number
+    esrb_rating: { name: string } | null
+    genres?: { name: string }[]
+    developers?: { name: string }[]
+    publishers?: { name: string }[]
+    parent_platforms?: { platform: { name: string } }[]
+    stores?: { store: { name: string } }[]
+}
+
+export const fetchApiGame = async (
+    id: number,
+    signal?: AbortSignal
+): Promise<ApiGameDetail> => {
+    const url = new URL(`${RAWG_API_URL}/games/${id}`)
+
+    url.searchParams.set('key', RAWG_API_KEY)
+
+    const response = await fetch(url.toString(), { signal })
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch game.')
+    }
+
+    return response.json()
+}
+
 export type FetchGamesParams = {
     dates?: string
     ordering?: string

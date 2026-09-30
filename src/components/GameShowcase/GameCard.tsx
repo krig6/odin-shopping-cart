@@ -1,7 +1,9 @@
 import { useCart } from '../../context/useCart'
 import { useWishlist } from '../../context/useWishlist'
 import { Cart, Heart } from '@boxicons/react'
+import { Link } from 'react-router'
 import type { Game } from '../../type/game'
+import { GAME_PRICE } from '../../config'
 
 type GameCardProps = {
     game: Game
@@ -45,26 +47,32 @@ export const GameCard = ({ game }: GameCardProps) => {
     }
 
     return (
-        <article className="rounded-lg border border-gray-600 text-[#F2E4D1]">
-            <img
-                className="h-30 w-full rounded-t-lg object-cover md:h-40 xl:aspect-2/3 xl:h-full xl:object-cover"
-                src={game.background_image}
-                alt={game.name}
-            />
+        <article className="group relative rounded-lg border border-gray-600 text-[#F2E4D1]">
+            <Link
+                to={`/game/${game.id}`}
+                aria-label={`View ${game.name}`}
+                className="block cursor-pointer after:absolute after:inset-0 after:content-['']"
+            >
+                <img
+                    className="h-30 w-full rounded-t-lg object-cover transition-opacity group-hover:opacity-80 md:h-40 xl:aspect-2/3 xl:h-full xl:object-cover"
+                    src={game.background_image}
+                    alt=""
+                />
+            </Link>
 
             <div className="p-2.5">
                 <h3 className="truncate text-base font-bold">{game.name}</h3>
 
                 <div className="mt-1.5 flex items-center justify-between">
                     <div className="mr-auto flex flex-col gap-1">
-                        <p className="text-sm">$49.99</p>
+                        <p className="text-sm">${GAME_PRICE.toFixed(2)}</p>
 
                         <p className="text-xs text-[#E5C158]">
                             ⭐ {game.rating}
                         </p>
                     </div>
 
-                    <div className="flex shrink-0 items-center gap-1.5">
+                    <div className="relative z-10 flex shrink-0 items-center gap-1.5">
                         <button
                             type="button"
                             className={`flex shrink-0 cursor-pointer items-center justify-center rounded-md p-2 text-[#7f7f7f] transition ${isInWishlist ? 'hover:bg-[#F5D77A]' : ''} hover:text-[#e5c158] focus-visible:ring-2 focus-visible:ring-[#E5C158] focus-visible:outline-none active:scale-95 ${isInWishlist ? 'bg-[#E5C158]' : 'bg-gray-700'}`}

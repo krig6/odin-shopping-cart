@@ -40,6 +40,36 @@ export const GameCardSkeleton = () => (
     </div>
 )
 
+export const GameDetailSkeleton = () => (
+    <div
+        role="status"
+        aria-label="Loading game"
+        className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 pt-6 md:flex-row md:items-stretch md:gap-10 md:px-8"
+    >
+        <Skeleton className="aspect-4/3 w-full shrink-0 md:aspect-auto md:min-h-80 md:w-1/2" />
+
+        <div className="flex min-w-0 flex-1 flex-col gap-3">
+            <Skeleton className="h-8 w-3/4" />
+            <Skeleton className="h-4 w-1/3" />
+            <Skeleton className="h-6 w-24" />
+            <div className="flex flex-col gap-2 pt-2 sm:flex-row">
+                <Skeleton className="h-11 w-full sm:w-40" />
+                <Skeleton className="h-11 w-full sm:w-40" />
+            </div>
+            <div className="flex flex-wrap gap-1.5 pt-2">
+                {Array.from({ length: 5 }, (_, index) => (
+                    <Skeleton key={index} className="h-6 w-16 rounded-full" />
+                ))}
+            </div>
+            <div className="flex flex-col gap-2 pt-2">
+                {Array.from({ length: 5 }, (_, index) => (
+                    <Skeleton key={index} className="h-3.5 w-full" />
+                ))}
+            </div>
+        </div>
+    </div>
+)
+
 type GameGridSkeletonProps = {
     count?: number
 }

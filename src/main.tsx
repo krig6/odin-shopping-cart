@@ -7,6 +7,7 @@ import { Homepage } from './components/Homepage/Homepage'
 import { Shop } from './components/Shop/Shop'
 import { Cart } from './components/Collection/Cart'
 import { Wishlist } from './components/Collection/Wishlist'
+import { GameDetail, GameNotFound } from './components/GameDetail/GameDetail'
 import { CartProvider } from './context/CartProvider'
 import { WishlistProvider } from './context/WishlistProvider'
 
@@ -19,6 +20,8 @@ const router = createBrowserRouter([
             { path: 'shop', element: <Shop /> },
             { path: 'cart', element: <Cart /> },
             { path: 'wishlist', element: <Wishlist /> },
+            { path: 'game/:id', element: <GameDetail /> },
+            { path: '*', element: <GameNotFound /> },
         ],
     },
 ])
