@@ -69,7 +69,7 @@
 .embla__slide-title {
     margin: 0;
     color: #f2e4d1;
-    font-size: 14px;
+    font-size: clamp(0.875rem, 0.5rem + 2vw, 2.75rem);
     font-weight: 700;
     line-height: 1.15;
     transition: color 0.2s ease;
@@ -219,10 +219,6 @@
 }
 
 @media (min-width: 425px) and (max-width: 1023px) {
-    .embla__slide-title {
-        font-size: 24px;
-    }
-
     .embla__slide-rating {
         font-size: 12px;
     }
@@ -233,10 +229,6 @@
 }
 
 @media (min-width: 1024px) {
-    .embla__slide-title {
-        font-size: 64px;
-    }
-
     .embla__slide-rating {
         font-size: 16px;
     }

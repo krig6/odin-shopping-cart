@@ -23,7 +23,11 @@ export const EmblaCarousel = (props: PropType) => {
     })
 
     useEffect(() => {
-        if (emblaApi && games.length > 0 && startIndex !== undefined) {
+        if (!emblaApi || games.length === 0) return
+
+        emblaApi.reInit()
+
+        if (startIndex !== undefined) {
             emblaApi.scrollTo(startIndex, true)
         }
     }, [emblaApi, games, startIndex])
