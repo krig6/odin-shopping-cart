@@ -61,7 +61,7 @@ export const Header = () => {
 
                     <button
                         type="button"
-                        className="lg:hidden"
+                        className="cursor-pointer transition-colors hover:text-[#E5C158] lg:hidden"
                         aria-label="Toggle menu"
                         aria-expanded={isMenuOpen}
                         onClick={() => setIsMenuOpen((prev) => !prev)}
