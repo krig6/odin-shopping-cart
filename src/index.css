@@ -30,3 +30,14 @@
     }
 }
 
+html,
+body,
+#root {
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    background-color: #0d1b2e;
+}
