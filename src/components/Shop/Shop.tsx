@@ -95,6 +95,11 @@ export const Shop = () => {
         setSearchParams(next)
     }
 
+    const handleClearFilters = () => {
+        setSelectedGenres([])
+        setSelectedRating(undefined)
+    }
+
     const allGames = useMemo(
         () =>
             loadMore.genresKey === listKey
@@ -147,6 +152,7 @@ export const Shop = () => {
                             selectedRating={selectedRating}
                             onGenreChange={handleGenreChange}
                             onRatingChange={handleRatingChange}
+                            onClear={handleClearFilters}
                         />
                     </aside>
                 </div>
